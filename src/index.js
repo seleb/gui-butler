@@ -51,6 +51,12 @@ $(document).ready(function(){
 	}
 
 
+	$("#channelWin,#channelOsx,#channelLinux,#channelOther").on("change",function(){
+		// update target preview
+		$("#targetPreview").val(app.getProjectUrl());	
+	});
+
+
 	////////////////
 	// MAIN STUFF //
 	////////////////
@@ -65,6 +71,8 @@ $(document).ready(function(){
 
 	$("#gameSelect").on("change", function(event){
 		app.selectProject($("select option:selected").val());
+		// update target preview
+		$("#targetPreview").val(app.getProjectUrl());
 	});
 
 	$("#selectedFile").on("click", function(event){

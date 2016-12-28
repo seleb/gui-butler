@@ -62,6 +62,11 @@ input[type="password"]{
 	margin-left:1em;
 }
 
+#targetPreview{
+	cursor:not-allowed;
+	background:#f4f4f4;
+}
+
 a{
 	color:#FA5C5C;
 	font-weight:700;

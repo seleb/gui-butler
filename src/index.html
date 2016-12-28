@@ -47,18 +47,18 @@
 		</section>
 
 		<section id="selectBuild">
-			<div class="input-block"><label for="channelWin">windows:</label><input type="checkbox" name="channelWin" id="channelWin"/></div>
-			<div class="input-block"><label for="channelOsx">osx:</label><input type="checkbox" name="channelOsx" id="channelOsx"/></div>
-			<div class="input-block"><label for="channelLinux">linux:</label><input type="checkbox" name="channelLinux" id="channelLinux"/></div>
-			<div class="input-block"><label for="channelOther">other:</label><input type="text" name="channelOther" id="channelOther" value="" placeholder="dash-separated-channels"/></div>
-
 			<div class="input-block"><label>Select .zip:</label><span id="selectedFile">no .zip selected</span></div>
+
+			<div class="input-block"><label for="channelWin">Windows:</label><input type="checkbox" name="channelWin" id="channelWin"/></div>
+			<div class="input-block"><label for="channelOsx">OSX:</label><input type="checkbox" name="channelOsx" id="channelOsx"/></div>
+			<div class="input-block"><label for="channelLinux">Linux:</label><input type="checkbox" name="channelLinux" id="channelLinux"/></div>
+			<div class="input-block"><label for="channelOther">Other:</label><input type="text" name="channelOther" id="channelOther" value="" placeholder="more-dash-separated-channels"/></div>
 		</section>
 
 		<section id="butler">
+			<div class="input-block"><label for="targetPreview">Target:</label><input type="text" name="targetPreview" id="targetPreview" value="" readonly/></div>
 
-			<button id="btnPush">Push Build</button>
-			<button id="btnCheckStatus">Check Build Status</button>
+			<div class="input-block"><label></label><button id="btnPush">Push Build</button> <button id="btnCheckStatus">Check Build Status</button></div>
 
 			<p>butler output:</p>
 			<pre id="output"></pre>
