@@ -198,7 +198,9 @@ input,select,#selectedFile{
 input[type="checkbox"]{
 	width:initial;
 }
-input:focus {
+input:focus,
+button:focus,
+select:focus{
 	outline-color: #fa5c5c;
 }
 
