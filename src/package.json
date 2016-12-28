@@ -1,0 +1,21 @@
+{
+  "name": "gui-butler",
+  "productName": "gui-butler",
+  "version": "0.0.1",
+  "description": "A GUI wrapper for itch.io's butler CLI",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . --appname=gui-butler --icon=favicon.ico --out=..\\bin\\ --platform=win32 --asar --prune --overwrite"
+  },
+  "author": "Sean S. LeBlanc",
+  "devDependencies": {
+    "electron": "^1.4.1",
+    "electron-packager": "^8.4.0",
+    "electron-prebuilt": "~1.4.13"
+  },
+  "dependencies": {
+    "jquery": "~3.1.1",
+    "dialog": "~0.2.0"
+  }
+}

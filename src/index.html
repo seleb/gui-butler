@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+	<title>gui-butler</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="styles.css"/>
+	<script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+	<header>
+		<h1><span id="icon"></span>gui-butler</h1>
+		<nav>
+			<button id="btnMinimize">minimize</button>
+			<button id="btnMaximize">maximize</button>
+			<button id="btnExit">close</button>
+		</nav>
+	</header>
+
+	<div id="main">
+		<section id="login" style="display:block;">
+
+			<p>To use this app, you'll need an API key (you can get one <a href="https://itch.io/api-keys">here</a>) and you need to be logged in to <a href="https://github.com/itchio/butler">butler</a> (it comes with the <a href="https://itch.io/app">itch.io app</a>).</p>
+
+			<label for="key">Key</label><input type="password" name="key" id="key" value=""/><br>
+			<label for="user">User</label><input type="text" name="user" id="user" value=""/><br>
+			<label for="rememberMe">Remember me</label><input type="checkbox" name="rememberMe" id="rememberMe"/><br>
+			<button>Show Games</button>
+		</section>
+
+
+		<section id="selectGame">
+			<label for="gameSelect">Game</label><select name="gameSelect" id="gameSelect"></select><br>
+
+			<img id="gameCover" src="" width="64px" height="50px" alt="game cover">
+			<span id="gameTitle">game title</span> - <span id="gameText">game text</span><br>
+			<a id="gameUrl" href="">view on itch.io</a>
+		</section>
+
+		<section id="selectBuild">
+			<label for="channelWin">windows</label><input type="checkbox" name="channelWin" id="channelWin"/><br>
+			<label for="channelOsx">osx</label><input type="checkbox" name="channelOsx" id="channelOsx"/><br>
+			<label for="channelLinux">linux</label><input type="checkbox" name="channelLinux" id="channelLinux"/><br>
+			<label for="channelOther">other</label><input type="text" name="channelOther" id="channelOther" value="" placeholder="dash-separated-channels"/>
+			<br>
+			<button id="gameFile">Select File</button> <span id="selectedFile">no file selected</span>
+		</section>
+
+		<section id="butler">
+
+			<button id="btnPush">Push Build</button>
+			<button id="btnCheckStatus">Check Build Status</button>
+			<br>
+			<br>
+
+			<label>butler</label>
+			<pre id="output"></pre>
+		</section>
+	</div>
+
+	<footer>
+		<sub><a href="https://seansleblanc.itch.io/gui-butler">View on itch.io</a> | <a href="https://github.com/seleb/gui-butler">Contribute on GitHub</a> | <a href="">Another link</a></sub>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,219 @@
+/* interactivity */
+*{
+	-webkit-user-select:none;
+	cursor:default;
+}
+header{
+	-webkit-app-region:drag;
+}
+
+header nav button{
+	-webkit-app-region:no-drag;
+}
+
+a,button,label,select,input{
+	cursor:pointer;
+}
+
+input[type="text"],
+input[type="password"]{
+	cursor:text;
+}
+
+
+/* style */
+#gameCover{
+	vertical-align:middle;
+}
+
+#gameText{
+	font-size:.9em;
+	font-style:italic;
+}
+
+#gameTitle{
+	font-size:1.1em;
+}
+
+a{
+	color:#FA5C5C;
+	font-weight:700;
+}
+
+body{
+	background:#FFF;
+	border:1px solid #d0d0d0;
+	border-radius:3px;
+	border-top:0;
+	box-shadow:2px 2px 4px rgba(0,0,0,0.2);
+	box-sizing:border-box;
+	height:100%;
+	margin:0;
+	padding:0;
+	position:relative;
+	width:100%;
+}
+
+div#main{
+	bottom:2em;
+	overflow:auto;
+	position:absolute;
+	top:3em;
+	width:inherit;
+}
+
+footer{
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	bottom:0;
+	height:2em;
+	text-align:center;
+}
+
+header{
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+	box-sizing:border-box;
+	height:3em;
+	padding-left:1em;
+	top:0;
+}
+
+header h1{
+	display:inline-block;
+	font-size:1.2em;
+	margin:0;
+	padding:0;
+}
+
+header h1 span{
+	background:url("favicon.png");
+	background-size:100% 100%;
+	display:inline-block;
+	height:3em;
+	vertical-align:middle;
+	width:3em;
+
+	-webkit-transition: transform 1.0s cubic-bezier(.43,.99,.08,1.09);
+	-webkit-app-region: no-drag;
+	transform:rotate(0deg) scale(0.66);
+}
+header h1 span:active{
+	transform:rotate(-360deg) scale(1);
+	cursor:none;
+}
+
+header nav{
+	display:inline-block;
+	position:absolute;
+	top:4px;
+	right:4px;
+}
+
+header nav button{
+	position:relative;
+	font-size:0;
+
+	height:1rem;
+	width:1rem;
+
+	display:inline-block;
+	vertical-align: middle;
+
+	border:0;
+	background: transparent;
+	background-size: 100% 100%;
+}
+header nav button:hover{
+	background-color: rgba(255,255,255,0.5);
+}
+#btnMinimize{
+	background-image: url("nav_icons_minimize.svg");
+}
+#btnMaximize{
+	background-image: url("nav_icons_maximize.svg");
+}
+#btnExit{
+	background-image: url("nav_icons_exit.svg");
+}
+#btnExit:hover{
+	background-color: rgba(255,128,128,0.5);
+}
+
+header,
+footer{
+	background:#F4F4F4;
+	border:1px solid #dadada;
+	color:#666;
+	left:0;
+	margin:4px;
+	position:fixed;
+	right:0;
+}
+
+html{
+	background:rgba(0,0,0,0.01);
+	box-sizing:border-box;
+	color:#222;
+	font-family:sans-serif;
+	font-size:1em;
+	height:100%;
+	margin:0;
+	padding:4px;
+	width:100%;
+}
+
+input,select{
+	-webkit-user-select:default;
+	display:inline-block;
+	max-width:100%;
+	width:15em;
+}
+
+label{
+	display:inline-block;
+	width:5em;
+}
+
+label:after{
+	content:": ";
+}
+
+pre#output{
+	background:#666;
+	border-radius:3px;
+	box-sizing:border-box;
+	color:#FFF;
+	font-family:monospace;
+	height:16em;
+	margin:0;
+	overflow:auto;
+	padding:5px;
+}
+
+section{
+	border-bottom:1px solid #dadada;
+	padding:1em;
+	display:none;
+}
+
+
+/* maximized view */
+html.maximized{
+	padding:0;
+}
+
+html.maximized body{
+	border:0;
+	box-shadow: 0;
+}
+
+html.maximized header,
+html.maximized footer,
+html.maximized div#main{
+	margin:0;
+}
+
+html.maximized #btnMaximize{
+	background-image: url("nav_icons_unmaximize.svg");
+}
