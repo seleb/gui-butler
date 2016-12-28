@@ -1,5 +1,4 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
-let win;
 function createWindow() {
 	win = new BrowserWindow({
 		useContentSize: true,
@@ -22,5 +21,3 @@ function createWindow() {
 	win.loadURL(`file://${__dirname}/index.html`);
 }
 app.on('ready', createWindow);
-
-//https://itch.io/api/1/KEY/my-games
