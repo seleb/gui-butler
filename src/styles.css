@@ -41,6 +41,27 @@ input[type="password"]{
 	font-size:1.1em;
 }
 
+#gameCover{
+	border:1px solid #d0d0d0;
+	background: #FFF;
+}
+#gamePreview{
+	box-sizing:border-box;
+	background:#f4f4f4;
+	border-radius: 3px;
+	margin:1em;
+	padding:1em;
+	text-align: center;
+	border:1px solid #d0d0d0;
+	box-shadow:2px 2px 4px rgba(0,0,0,0.1);
+}
+#gamePreviewText{
+	display:inline-block;
+	vertical-align: middle;
+	text-align: left;
+	margin-left:1em;
+}
+
 a{
 	color:#FA5C5C;
 	font-weight:700;
@@ -214,13 +235,7 @@ label{
 	display:inline-block;
 	width:10em;
 	text-align: right;
-}
-
-label:after{
-	content:": ";
-	width:1em;
-	display:inline-block;
-	text-align: left;
+	margin-right: 1em;
 }
 
 #selectedFile{
