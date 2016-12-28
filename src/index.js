@@ -173,7 +173,7 @@ $(document).ready(function(){
 	 	butler.status(url);
 	});
 
-	$("#gameFile").on("click", function(event){
+	$("#selectedFile").on("click", function(event){
 		remote.dialog.showOpenDialog(
 		{
 			title: "Select build archive",

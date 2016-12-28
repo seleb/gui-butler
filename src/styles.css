@@ -22,6 +22,12 @@ input[type="password"]{
 
 
 /* style */
+
+*{
+	font-family:Century Gothic, sans-serif;
+}
+
+
 #gameCover{
 	vertical-align:middle;
 }
@@ -52,6 +58,19 @@ body{
 	padding:0;
 	position:relative;
 	width:100%;
+}
+
+button{
+	padding: 5px;
+	border: 0;
+	border-bottom: solid 1px white;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #fa5c5c;
+	vertical-align: middle;
 }
 
 div#main{
@@ -155,28 +174,59 @@ html{
 	background:rgba(0,0,0,0.01);
 	box-sizing:border-box;
 	color:#222;
-	font-family:sans-serif;
-	font-size:1em;
+	font-size:0.8em;
 	height:100%;
 	margin:0;
 	padding:4px;
 	width:100%;
 }
 
-input,select{
+input,select,#selectedFile{
+	font-size:1em;
 	-webkit-user-select:default;
 	display:inline-block;
-	max-width:100%;
-	width:15em;
+	max-width:50%;
+	width:35em;
+	vertical-align: middle;
+	padding:2px;
+	text-align: left;
+	border:solid 1px #dadada;
+	border-radius: 3px;
+	margin-top:2px;
+	margin-bottom:2px;
+}
+input[type="checkbox"]{
+	width:initial;
+}
+input:focus {
+	outline-color: #fa5c5c;
+}
+
+.input-block{
+	display:block;
+	white-space: nowrap;
+	max-width: 100%;
 }
 
 label{
 	display:inline-block;
-	width:5em;
+	width:10em;
+	text-align: right;
 }
 
 label:after{
 	content:": ";
+	width:1em;
+	display:inline-block;
+	text-align: left;
+}
+
+#selectedFile{
+	display:inline-block;
+	text-overflow: ellipsis;
+	overflow:hidden;
+	white-space: nowrap;
+	cursor:pointer;
 }
 
 pre#output{
