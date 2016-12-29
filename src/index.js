@@ -168,6 +168,36 @@ App.prototype.selectFile = function(){
 			$("#selectedFile").text(this.selectedFile);
 			$("section#butler").slideDown();
 
+			// if there aren't already any channels set
+			// search the filename for "win","osx","linux" and check their boxes
+			// also search for "web","32","64" and add them to other
+			if(this.getChannels().length == 0){
+				// only use the file and not the whole path to reduce false positives
+				var fileEnd = this.selectedFile.toLowerCase().split(/[\/\\]+/).pop();
+				if(fileEnd.indexOf("win") !== -1){
+					$("#channelWin").trigger("click");
+				}
+				if(fileEnd.indexOf("osx") !== -1){
+					$("#channelOsx").trigger("click");
+				}
+				if(fileEnd.indexOf("linux") !== -1){
+					$("#channelLinux").trigger("click");
+				}
+				if(fileEnd.indexOf("web") !== -1){
+					$("#channelOther").val("web-");
+				}
+				if(fileEnd.indexOf("32") !== -1){
+					$("#channelOther").val($("#channelOther").val()+"32-");
+				}
+				if(fileEnd.indexOf("64") !== -1){
+					$("#channelOther").val($("#channelOther").val()+"64-");
+				}
+				if($("#channelOther").val().substr(-1) == "-"){
+					$("#channelOther").val($("#channelOther").val().slice(0,-1));
+					$("#channelOther").trigger("change");
+				}
+			}
+
 		}else if($("#selectedFile").text().length <= 0){
 			// canceled selection
 			$("section#butler").slideUp();
