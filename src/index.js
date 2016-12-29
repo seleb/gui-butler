@@ -217,7 +217,7 @@ App.prototype.getChannels = function(){
 	}
 
 	// add custom channels
-	channels += $("#channelOther").val();
+	channels += $("#channelOther").val().toLowerCase();
 
 	// remove the last dash
 	if(channels.substr(-1) == "-"){
