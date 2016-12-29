@@ -19,21 +19,10 @@ App.prototype.login = function(key, user, rememberMe){
 	// TODO: prevent from re-submitting while AJAX is running
 	// TODO: clear existing data in next stages (they might change users and invalidate existing project data)
 
-	if(rememberMe){
-		// save login details to local storage
-		window.localStorage.setItem("key", key);
-		window.localStorage.setItem("rememberMe", "1");
-	}else{
-		// clear loging details from local storage
-		window.localStorage.setItem("key", "");
-		window.localStorage.setItem("rememberMe", "0");
-	}
 
 	$.ajax({
 		url: "https://itch.io/api/1/"+key+"/my-games"
 	}).done(function(data){
-		console.log(data);
-
 		// error handling
 		
 		if(data.errors){
@@ -55,6 +44,19 @@ App.prototype.login = function(key, user, rememberMe){
 
 
 		// success!
+
+		if(rememberMe){
+			// save login details to local storage
+			window.localStorage.setItem("key", key);
+			window.localStorage.setItem("rememberMe", "1");
+		}else{
+			// clear login details from local storage
+			window.localStorage.setItem("key", "");
+			window.localStorage.setItem("rememberMe", "0");
+		}
+
+
+
 		// find all usernames associated with key by stripping URLs
 		var users={};
 		for(var i = 0; i < data.games.length; ++i){
@@ -276,7 +278,6 @@ Butler.prototype.onError = function(data){
 	this.onData(data);
 };
 Butler.prototype.onClose = function(code){
-	console.log("child process exited with code "+code);
 	this.busy = false;
 };
 
