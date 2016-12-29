@@ -16,19 +16,19 @@ var App = function(){
 };
 
 App.prototype.login = function(key, user, rememberMe){
-	// TODO: prevent from re-submitting while AJAX is running
-	// TODO: clear existing data in next stages (they might change users and invalidate existing project data)
-
+	$("#btnLogin").prop("disabled",true);
 
 	$.ajax({
 		url: "https://itch.io/api/1/"+key+"/my-games"
 	}).done(function(data){
+
 		// error handling
 		
 		if(data.errors){
 			// error when submitting API key
 			
 			alert(data.errors.toString());
+			$("#btnLogin").prop("disabled",false);
 
 			return;
 		}
@@ -37,6 +37,7 @@ App.prototype.login = function(key, user, rememberMe){
 			// the user has nothing associated with their key
 			
 			alert("Error: couldn't find any projects associated with this key. gui-butler can only push builds to existing projects; you need to use itch.io to actually create them.");
+			$("#btnLogin").prop("disabled",false);
 
 			return;
 		}
@@ -94,6 +95,8 @@ App.prototype.login = function(key, user, rememberMe){
 
 		$("section#selectUser").slideDown();
 	}.bind(this)).fail(function(){
+		$("#btnLogin").prop("disabled",false);
+
 		// couldn't get a response
 		alert("Error: itch.io failed to respond. Check your internet connection etc.");
 	}.bind(this));
@@ -101,6 +104,8 @@ App.prototype.login = function(key, user, rememberMe){
 
 App.prototype.logout = function(){
 	$("section#login").slideDown();
+
+	$("#btnLogin").prop("disabled",false);
 
 	$("#selectedFile").html("no .zip selected&hellip;");
 
