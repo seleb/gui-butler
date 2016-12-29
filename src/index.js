@@ -224,6 +224,17 @@ App.prototype.validate = function(){
 var Butler = function(){
 	this.process = "butler";
 	this.busy = false;
+
+	try{
+		child_process.execFile(this.process, ["-V"], function(error, stdout, stderr){
+			if(error){
+				alert("butler error:\n"+error.toString());
+			}
+			$("#version").html((stdout || stderr).toString());
+		});
+	}catch(e){
+		alert("butler error:\n"+e.toString());
+	}
 };
 Butler.prototype.call = function(args){
 	if(this.busy){
@@ -235,13 +246,13 @@ Butler.prototype.call = function(args){
 		$("#output").text("");
 
 	try{
-		var child = spawn(this.process, args);
+		var child = child_process.spawn(this.process, args);
 
 		child.stdout.on("data", this.onData.bind(this));
 		child.stderr.on("data", this.onError.bind(this));
 		child.on("close", this.onClose.bind(this));
 	}catch(e){
-		alert(e.toString());
+		alert("butler error:\n"+e.toString());
 
 		this.busy = false;
 	}
@@ -296,12 +307,12 @@ Butler.prototype.onClose = function(code){
 
 $(document).ready(function(){
 
-	var app = new App();
-	var butler = new Butler();
-
 	// get some of the stuff we need for later
 	remote = require("electron").remote;
-	spawn = require("child_process").spawn;
+	child_process = require("child_process");
+
+	var app = new App();
+	var butler = new Butler();
 
 
     // open links externally by default

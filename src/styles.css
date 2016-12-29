@@ -114,7 +114,7 @@ button:disabled{
 }
 
 div#main{
-	bottom:2em;
+	bottom:3em;
 	overflow:auto;
 	position:absolute;
 	top:3em;
@@ -125,8 +125,17 @@ footer{
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
 	bottom:0;
-	height:2em;
+	height:3em;
 	text-align:center;
+}
+
+footer sub{
+	display:block;
+	width:100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-top:2px;
 }
 
 header{
