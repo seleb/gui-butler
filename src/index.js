@@ -163,11 +163,12 @@ App.prototype.selectFile = function(){
 		properties: ["openFile"]
 	},
 	function(filenames){
-		if(filenames.length==1){
+		if(filenames && filenames.length == 1){
 			this.selectedFile = filenames[0];
 			$("#selectedFile").text(this.selectedFile);
 			$("section#butler").slideDown();
-		}else{
+
+		}else if($("#selectedFile").text().length <= 0){
 			// canceled selection
 			$("section#butler").slideUp();
 		}
