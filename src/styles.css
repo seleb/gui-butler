@@ -265,7 +265,8 @@ label{
 	cursor:pointer;
 }
 
-pre#output{
+#output{
+	display:block;
 	background:#666;
 	border-radius:3px;
 	box-sizing:border-box;
@@ -275,6 +276,7 @@ pre#output{
 	margin:0;
 	overflow:auto;
 	padding:5px;
+	word-break:break-all;
 }
 
 section{

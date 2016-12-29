@@ -173,16 +173,43 @@ Butler.prototype.call = function(args){
 };
 
 Butler.prototype.push = function(file, url){
-	this.call(["push", file, url, "-v"]);
+	this.call(["push", file, url]);
 };
 Butler.prototype.status = function(url){
-	this.call(["status", url, "-v"]);
+	this.call(["status", url]);
 };
 
 Butler.prototype.onData = function(data){
-	$("#output").append(data.toString());
+	var s = data.toString();
+
+	s = s.replace(/\n/g, "<br>");
+	s = s.replace(/ /g, "&nbsp;");
+
+	s = $("#output").html() + s;
+
+	var a = s.split("\r");
+	s = "";
+	while(a.length > 1){
+		var c = a.shift();
+		s += c.substr(0, c.lastIndexOf("<br>")+4);
+	}
+	s += a.shift();
+
+	/*for(var i = 0; i < data.length; ++i){
+		var c = String.fromCodePoint(data[i]);
+		console.log(data[i], c);
+		if(c == "\n"){
+			s += "<br>";
+		}if(c == " "){
+			s += "&nbsp;";
+		}else if(c == "\r"){
+			s = s.substring(0, s.lastIndexOf("<br>"))+"<br>";
+		}else{
+			s += c;
+		}
+	}*/
+	$("#output").html(s);
 	$("#output").scrollTop($("#output")[0].scrollHeight);
-	$("#output").scrollLeft($("#output")[0].scrollWidth);
 };
 Butler.prototype.onError = function(data){
 	this.onData(data);
