@@ -6,7 +6,9 @@ window.$ = window.jQuery = require("jquery");
 // APP //
 /////////
 var App = function(){
-	this.user = null;
+	this.users = null;
+	this.selectedUserIdx = null;
+	this.selectedUser = null;
 	this.projects = null;
 	this.selectedProjectIdx = null;
 	this.selectedProject = null;
@@ -20,12 +22,10 @@ App.prototype.login = function(key, user, rememberMe){
 	if(rememberMe){
 		// save login details to local storage
 		window.localStorage.setItem("key", key);
-		window.localStorage.setItem("user", user);
 		window.localStorage.setItem("rememberMe", "1");
 	}else{
 		// clear loging details from local storage
 		window.localStorage.setItem("key", "");
-		window.localStorage.setItem("user", "");
 		window.localStorage.setItem("rememberMe", "0");
 	}
 
@@ -39,50 +39,99 @@ App.prototype.login = function(key, user, rememberMe){
 			// TODO: fail and notify
 		}
 
-		this.projects = data.games;
-
-		if(this.projects.length <= 0){
-			// the user has no games associated with their key
+		if(data.games.length <= 0){
+			// the user has nothing associated with their key
 			// TODO: fail and notify
 		}
 
-		// store the user for butler to use later
-		this.user = user;
+		// find all usernames associated with key by stripping URLs
+		var users={};
+		for(var i = 0; i < data.games.length; ++i){
+			var username = data.games[i].url.split("https://")[1].split(".itch.io/")[0];
+			if(!users[username]){
+				users[username] = {
+					username: username,
+					projects:[]
+				}
+			}
+			users[username].projects.push(data.games[i]);
+		}
 
-		// add the users games to the dropdown
+		// add users to internal list + dropdown
+		this.users = [];
 		var s="";
-		for(var i = 0; i < this.projects.length; ++i){
-			var g = this.projects[i];
-			s += "<option value=\"" + i + "\">" + g.title + "</option>";
-		}	
+		var i = 0;
+		for(var u in users){
+			this.users.push(users[u]);
+			s += "<option value=\"" + (i++) + "\">" + users[u].username + "</option>";
+		}
+		$("#userSelect").html(s);
 
-		// auto-select the first game in the dropdown
+
+
+		// update section display
+		$("section#login").hide();
+		$("section#logout").show();
+
+
+
+		// auto-select the first user in the dropdown
 		// (provides a bit of feedback + removes the need for a null entry)
-		$("#gameSelect").append(s);
-		$("#gameSelect").val("0").change();
+		$("#userSelect").val("0").change();
 
-
-		$("#selectGame").show();
+		$("section#selectUser").show();
 	}.bind(this)).fail(function(){
 		// couldn't get a response
 		// TODO: fail and notify
 		console.error("something went wrong!");
 	}.bind(this));
 };
+
+App.prototype.logout = function(){
+	$("section#login").show();
+
+	$("section#logout").hide();
+	$("section#selectProject").hide();
+	$("section#selectBuild").hide();
+	$("section#selectUser").hide();
+	$("section#butler").hide();
+};
+App.prototype.selectUser = function(idx){
+	this.selectedUserIdx = parseInt(idx,10);
+	this.selectedUser = this.users[this.selectedUserIdx];
+
+	// update link
+	$("#userPreview").attr("href", "https://"+this.selectedUser.username+".itch.io");
+
+	// add the users games to the dropdown
+	this.projects = this.selectedUser.projects;
+	s="";
+	for(var i = 0; i < this.projects.length; ++i){
+		var g = this.projects[i];
+		s += "<option value=\"" + i + "\">" + g.title + "</option>";
+	}
+	$("#projectSelect").html(s);
+
+	// auto-select the first game in the dropdown
+	// (provides a bit of feedback + removes the need for a null entry)
+	$("#projectSelect").val("0").change();
+
+	$("#selectProject").show();
+};
 App.prototype.selectProject = function(idx){
 	this.selectedProjectIdx = parseInt(idx,10);
 	this.selectedProject = this.projects[this.selectedProjectIdx];
 
 	// get rid of the old cover, then set then new one
-	$("#gameCover").attr("src", "");
-	$("#gameCover").attr("src", this.selectedProject.cover_url);
+	$("#projectCover").attr("src", "");
+	$("#projectCover").attr("src", this.selectedProject.cover_url);
 
 	// update text
-	$("#gameTitle").text(this.selectedProject.title);
-	$("#gameText").text(this.selectedProject.short_text);
+	$("#projectTitle").text(this.selectedProject.title);
+	$("#projectText").text(this.selectedProject.short_text);
 
 	// update link
-	$("#gameUrl").attr("href", this.selectedProject.url);
+	$("#projectUrl").attr("href", this.selectedProject.url);
 
 	$("#selectBuild").show();
 };
@@ -133,7 +182,7 @@ App.prototype.getProjectShortUrl = function(){
 };
 App.prototype.getProjectUrl = function(){
 	// butler URLs are user/project-url:channels-in-a-dash-separated-list
-	return this.user+"/"+this.getProjectShortUrl()+":"+this.getChannels();
+	return this.selectedUser.username+"/"+this.getProjectShortUrl()+":"+this.getChannels();
 };
 
 App.prototype.validate = function(){
@@ -273,12 +322,16 @@ $(document).ready(function(){
 		app.validate();
 	});
 	
-	$("#login button").on("click", function(event){
+	$("#btnLogin").on("click", function(event){
 		app.login(
 			$("#key").val(),
 			$("#user").val(),
 			$("#rememberMe")[0].checked
 		);
+	});
+	
+	$("#btnLogout").on("click", function(event){
+		app.logout();
 	});
 
 	// get login details
@@ -289,8 +342,12 @@ $(document).ready(function(){
 		$("#login button").trigger("click");
 	}
 
-	$("#gameSelect").on("change", function(event){
-		app.selectProject($("select option:selected").val());
+	$("#userSelect").on("change", function(event){
+		app.selectUser($("#userSelect option:selected").val());
+	});
+
+	$("#projectSelect").on("change", function(event){
+		app.selectProject($("#projectSelect option:selected").val());
 		app.validate();
 	});
 

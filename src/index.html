@@ -28,20 +28,28 @@
 			<p>To use this app, you'll need an API key (you can get one <a href="https://itch.io/api-keys">here</a>) and you need to be logged in to <a href="https://github.com/itchio/butler">butler</a> (it comes with the <a href="https://itch.io/app">itch.io app</a>).</p>
 
 			<div class="input-block"><label for="key">Key:</label><input type="password" name="key" id="key" value=""/></div>
-			<div class="input-block"><label for="user">User:</label><input type="text" name="user" id="user" value=""/></div>
 			<div class="input-block"><label for="rememberMe">Remember me:</label><input type="checkbox" name="rememberMe" id="rememberMe"/></div>
-			<label></label><button>Show Projects</button>
+			<label></label><button id="btnLogin">Show Projects</button>
+		</section>
+
+		<section id="logout">
+			<label></label><button id="btnLogout">Change API Key</button>
 		</section>
 
 
-		<section id="selectGame">
-			<div class="input-block"><label for="gameSelect">Project</label><select name="gameSelect" id="gameSelect"></select></div>
+		<section id="selectUser">
+			<div class="input-block"><label for="userSelect">Account</label><select name="userSelect" id="userSelect"></select></div>
+			<div class="input-block"><label></label><a href="" id="userPreview">view on itch.io</a></div>
+		</section>
 
-			<div id="gamePreview">
-				<img id="gameCover" src="" width="64px" height="50px" alt="game cover">
-				<div id="gamePreviewText">
-					<span id="gameTitle">game title</span> - <span id="gameText">game text</span><br>
-					<a id="gameUrl" href="">view on itch.io</a>
+		<section id="selectProject">
+			<div class="input-block"><label for="projectSelect">Project</label><select name="projectSelect" id="projectSelect"></select></div>
+
+			<div id="projectPreview">
+				<img id="projectCover" src="" width="64px" height="50px" alt="project cover">
+				<div id="projectPreviewText">
+					<span id="projectTitle">project title</span> - <span id="projectText">project text</span><br>
+					<a id="projectUrl" href="">view on itch.io</a>
 				</div>
 			</div>
 		</section>
