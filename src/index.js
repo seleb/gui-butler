@@ -83,8 +83,8 @@ App.prototype.login = function(key, user, rememberMe){
 
 
 		// update section display
-		$("section#login").hide();
-		$("section#logout").show();
+		$("section#login").slideUp();
+		$("section#logout").slideDown();
 
 
 
@@ -92,7 +92,7 @@ App.prototype.login = function(key, user, rememberMe){
 		// (provides a bit of feedback + removes the need for a null entry)
 		$("#userSelect").val("0").change();
 
-		$("section#selectUser").show();
+		$("section#selectUser").slideDown();
 	}.bind(this)).fail(function(){
 		// couldn't get a response
 		alert("Error: itch.io failed to respond. Check your internet connection etc.");
@@ -100,15 +100,15 @@ App.prototype.login = function(key, user, rememberMe){
 };
 
 App.prototype.logout = function(){
-	$("section#login").show();
+	$("section#login").slideDown();
 
 	$("#selectedFile").html("no .zip selected&hellip;");
 
-	$("section#logout").hide();
-	$("section#selectProject").hide();
-	$("section#selectBuild").hide();
-	$("section#selectUser").hide();
-	$("section#butler").hide();
+	$("section#logout").slideUp();
+	$("section#selectProject").slideUp();
+	$("section#selectBuild").slideUp();
+	$("section#selectUser").slideUp();
+	$("section#butler").slideUp();
 };
 App.prototype.selectUser = function(idx){
 	this.selectedUserIdx = parseInt(idx,10);
@@ -130,7 +130,7 @@ App.prototype.selectUser = function(idx){
 	// (provides a bit of feedback + removes the need for a null entry)
 	$("#projectSelect").val("0").change();
 
-	$("#selectProject").show();
+	$("#selectProject").slideDown();
 };
 App.prototype.selectProject = function(idx){
 	this.selectedProjectIdx = parseInt(idx,10);
@@ -147,7 +147,7 @@ App.prototype.selectProject = function(idx){
 	// update link
 	$("#projectUrl").attr("href", this.selectedProject.url);
 
-	$("#selectBuild").show();
+	$("#selectBuild").slideDown();
 };
 App.prototype.selectFile = function(){
 	// prompt user to select a .zip archive
@@ -161,10 +161,10 @@ App.prototype.selectFile = function(){
 		if(filenames.length==1){
 			this.selectedFile = filenames[0];
 			$("#selectedFile").text(this.selectedFile);
-			$("section#butler").show();
+			$("section#butler").slideDown();
 		}else{
 			// canceled selection
-			$("section#butler").hide();
+			$("section#butler").slideUp();
 		}
 	}.bind(this));
 };
