@@ -90,6 +90,8 @@ App.prototype.login = function(key, user, rememberMe){
 App.prototype.logout = function(){
 	$("section#login").show();
 
+	$("#selectedFile").html("no .zip selected&hellip;");
+
 	$("section#logout").hide();
 	$("section#selectProject").hide();
 	$("section#selectBuild").hide();
