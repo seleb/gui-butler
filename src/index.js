@@ -338,7 +338,6 @@ $(document).ready(function(){
 
 	// get login details
 	$("#key").val(window.localStorage.getItem("key"));
-	$("#user").val(window.localStorage.getItem("user"));
 	if(window.localStorage.getItem("rememberMe") == "1"){
 		$("#rememberMe").prop("checked", true);
 		$("#login button").trigger("click");
