@@ -228,11 +228,18 @@ Butler.prototype.call = function(args){
 
 	this.busy = true;
 		$("#output").text("");
-	var child = spawn(this.process, args);
 
-	child.stdout.on("data", this.onData.bind(this));
-	child.stderr.on("data", this.onError.bind(this));
-	child.on("close", this.onClose.bind(this));
+	try{
+		var child = spawn(this.process, args);
+
+		child.stdout.on("data", this.onData.bind(this));
+		child.stderr.on("data", this.onError.bind(this));
+		child.on("close", this.onClose.bind(this));
+	}catch(e){
+		alert(e.toString());
+
+		this.busy = false;
+	}
 };
 
 Butler.prototype.push = function(file, url){
