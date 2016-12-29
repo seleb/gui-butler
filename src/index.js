@@ -34,16 +34,27 @@ App.prototype.login = function(key, user, rememberMe){
 	}).done(function(data){
 		console.log(data);
 
+		// error handling
+		
 		if(data.errors){
 			// error when submitting API key
-			// TODO: fail and notify
+			
+			alert(data.errors.toString());
+
+			return;
 		}
 
 		if(data.games.length <= 0){
 			// the user has nothing associated with their key
-			// TODO: fail and notify
+			
+			alert("Error: couldn't find any projects associated with this key. gui-butler can only push builds to existing projects; you need to use itch.io to actually create them.");
+
+			return;
 		}
 
+
+
+		// success!
 		// find all usernames associated with key by stripping URLs
 		var users={};
 		for(var i = 0; i < data.games.length; ++i){
@@ -82,8 +93,7 @@ App.prototype.login = function(key, user, rememberMe){
 		$("section#selectUser").show();
 	}.bind(this)).fail(function(){
 		// couldn't get a response
-		// TODO: fail and notify
-		console.error("something went wrong!");
+		alert("Error: itch.io failed to respond. Check your internet connection etc.");
 	}.bind(this));
 };
 
@@ -340,6 +350,8 @@ $(document).ready(function(){
 	$("#key").val(window.localStorage.getItem("key"));
 	if(window.localStorage.getItem("rememberMe") == "1"){
 		$("#rememberMe").prop("checked", true);
+
+		// auto-login
 		$("#login button").trigger("click");
 	}
 
