@@ -25,7 +25,12 @@
 	</header>
 
 	<div id="main">
-		<section id="login" style="display:block;">
+
+		<section id="butler" style="display:block;">
+			<p>butler output:</p>
+			<pre id="output"></pre>
+		</section>
+		<section id="login">
 
 			<p>
 				<strong>Setup Instructions:</strong>
@@ -74,13 +79,14 @@
 			<div class="input-block"><label for="channelOther">Other:</label><input type="text" name="channelOther" id="channelOther" value="" placeholder="more-dash-separated-channels"/></div>
 		</section>
 
-		<section id="butler">
+		<section id="pushBuild">
 			<div class="input-block"><label for="targetPreview">Target:</label><input type="text" name="targetPreview" id="targetPreview" value="" readonly/></div>
 
 			<div class="input-block"><label></label><button id="btnPush" disabled>Push Build</button> <button id="btnCheckStatus" disabled>Check Build Status</button></div>
 
-			<p>butler output:</p>
-			<pre id="output"></pre>
+
+			<div class="input-block"><label for="eta">ETA:</label><input type="text" name="eta" id="eta" value="" readonly/></div>
+			<div id="progressBar"><div> </div></div>
 		</section>
 	</div>
 

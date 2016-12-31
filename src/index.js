@@ -9,12 +9,12 @@ $(document).ready(function(){
 	remote = require("electron").remote;
 	child_process = require("child_process");
 
-	var app = new App();
+	app = new App();
 
 
     // open links externally by default
     // since we're using a single-page frameless app, opening them in electron would be pretty weird
-	var shell = require("electron").shell;
+	shell = require("electron").shell;
     $(document).on("click", "a[href^=\"http\"]", function(event) {
         event.preventDefault();
         shell.openExternal(this.href);
@@ -24,7 +24,7 @@ $(document).ready(function(){
     ///////////////////
     // FRAME BUTTONS //
     ///////////////////
-	var win = remote.getCurrentWindow();
+	win = remote.getCurrentWindow();
 
 	win.on("maximize", function(){
 		$("html").addClass("maximized");
@@ -90,14 +90,14 @@ $(document).ready(function(){
 	});
 
 	$("#btnPush").on("click",function(event){
-	 	app.push(
+	 	app.butler_push(
 	 		$("#selectedFile").text(),
 	 		app.getProjectUrl()
 	 	);
 	});
 
 	$("#btnCheckStatus").on("click",function(event){
-	 	app.status(app.getProjectUrl());
+	 	app.butler_status(app.getProjectUrl());
 	});
 
 

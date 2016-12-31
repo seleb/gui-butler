@@ -13,10 +13,9 @@ var App = function(){
 	this.butler = new Butler();
 
 
-	// get the version number
-	this.butler.call(["-V"], false, null, function(stderr){
-		$("#version").html(stderr.toString());
-	});
+	
+	this.butler_version();
+	this.butler_login();
 
 	// TODO: notify user if copy of butler is out of date
 	// and/or tell butler to update itself
@@ -55,6 +54,7 @@ App.prototype.login = function(key, user, rememberMe){
 
 		if(rememberMe){
 			// save login details to local storage
+			// TODO: also save the index of currently selected user/project; it gets kind of annoying to have to re-select if you're opening/closing frequently
 			window.localStorage.setItem("key", key);
 			window.localStorage.setItem("rememberMe", "1");
 		}else{
@@ -120,7 +120,7 @@ App.prototype.logout = function(){
 	$("section#selectProject").slideUp();
 	$("section#selectBuild").slideUp();
 	$("section#selectUser").slideUp();
-	$("section#butler").slideUp();
+	$("section#pushBuild").slideUp();
 };
 App.prototype.selectUser = function(idx){
 	this.selectedUserIdx = parseInt(idx,10);
@@ -173,7 +173,7 @@ App.prototype.selectFile = function(){
 		if(filenames && filenames.length == 1){
 			this.selectedFile = filenames[0];
 			$("#selectedFile").text(this.selectedFile);
-			$("section#butler").slideDown();
+			$("section#pushBuild").slideDown();
 
 			// if there aren't already any channels set
 			// search the filename for "win","osx","linux" and check their boxes
@@ -207,7 +207,7 @@ App.prototype.selectFile = function(){
 
 		}else if($("#selectedFile").text().length <= 0){
 			// canceled selection
-			$("section#butler").slideUp();
+			$("section#pushBuild").slideUp();
 		}
 	}.bind(this));
 };
@@ -254,6 +254,32 @@ App.prototype.validate = function(){
 		$("#btnCheckStatus").prop("disabled",false);
 	}
 }
+
+
+// calling butler
+App.prototype.butler_push = function(file, url){
+	this.butler.call(["push", file, url], true, this.onMessage.bind(this), this.onMessage.bind(this));
+};
+App.prototype.butler_status = function(url){
+	this.butler.call(["status", url], false, this.onMessage.bind(this), this.onMessage.bind(this));
+};
+App.prototype.butler_login = function(json){
+	this.butler.call(["login"], true, this.onMessage.bind(this), this.onMessage.bind(this));
+};
+App.prototype.butler_logout = function(json){
+	// TODO: should probably replace the --assume-yes with something to handle the prompt message and let user decide
+	// no message types associated with logout, so we call it synchronously
+	this.butler.call(["logout","--assume-yes"], false, this.onMessage.bind(this), this.onMessage.bind(this));
+};
+App.prototype.butler_version = function(){
+	this.butler.call(["-V"], false, null, function(stderr){
+		$("#version").html(stderr.toString());
+	});
+};
+
+
+
+// receiving messages from butler
 App.prototype.onMessage = function(data){
 	//console.log(data.toString());
 	var messages = data.toString().split("}\n");
@@ -271,26 +297,38 @@ App.prototype.onMessage = function(data){
 				message:json,
 				level:"info"
 			};
-			console.error("JSON parse failed; assuming response was an info log: ",e);
+			console.error("JSON parse failed; assuming response was an info log\n",e);
 		}
-		this[json.type](json);
+		this["json_"+json.type](json);
 	}
 };
-App.prototype.log = function(json){
+App.prototype.json_log = function(json){
+	// general purpose logging
 	// TODO: provide a way to show debug logs in addition to info
 	if(json.level == "info"){
 		$("#output").append(json.message+"\n");
 		$("#output").scrollTop($("#output")[0].scrollHeight);
 	}
 };
-App.prototype.progress = function(json){
-	$("#output").append(json.percentage+" / 100 %\n");
-	$("#output").scrollTop($("#output")[0].scrollHeight);
+App.prototype.json_progress = function(json){
+	// update on upload progress
+	// TODO: format ETA
+	$("#progressBar div").width(json.percentage+"%");
+	$("#eta").val(json.eta);
 };
-
-App.prototype.push = function(file, url){
-	this.butler.call(["push", file, url], true, this.onMessage.bind(this), this.onMessage.bind(this));
+App.prototype.json_login = function(json){
+	// attempting to login
+	shell.openExternal(json.uri);
 };
-App.prototype.status = function(url){
-	this.butler.call(["status", url], false, this.onMessage.bind(this), this.onMessage.bind(this));
+App.prototype.json_result = function(json){
+	// finished logging in
+	if(json.value.status == "success"){
+		$("section#login").slideDown();
+	}else{
+		// TODO: idk; haven't actually tested the fail case yet
+		alert(json);
+	}
+};
+App.prototype.json_error = function(json){
+	alert(json.message);
 };
