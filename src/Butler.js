@@ -23,8 +23,6 @@ Butler.prototype.call = function(args, async, onData, onError){
 
 	// block future butler calls till this one's done
 	this.busy = true;
-	
-	$("#output").text("");
 
 	try{
 		if(async){
