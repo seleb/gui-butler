@@ -10,6 +10,16 @@ var App = function(){
 	this.selectedProjectIdx = null;
 	this.selectedProject = null;
 	this.selectedFile = null;
+	this.butler = new Butler();
+
+
+	// get the version number
+	this.butler.call(["-V"], false, null, function(stderr){
+		$("#version").html(stderr.toString());
+	});
+
+	// TODO: notify user if copy of butler is out of date
+	// and/or tell butler to update itself
 };
 
 App.prototype.login = function(key, user, rememberMe){
@@ -244,3 +254,43 @@ App.prototype.validate = function(){
 		$("#btnCheckStatus").prop("disabled",false);
 	}
 }
+App.prototype.onMessage = function(data){
+	//console.log(data.toString());
+	var messages = data.toString().split("}\n");
+	
+	for(var i = 0; i < messages.length; ++i){
+		var json = messages[i];
+		if(json == ""){
+			continue;
+		}
+		try{
+			json = JSON.parse(json+"}");
+		}catch(e){
+			json = {
+				type:"log",
+				message:json,
+				level:"info"
+			};
+			console.error("JSON parse failed; assuming response was an info log: ",e);
+		}
+		this[json.type](json);
+	}
+};
+App.prototype.log = function(json){
+	// TODO: provide a way to show debug logs in addition to info
+	if(json.level == "info"){
+		$("#output").append(json.message+"\n");
+		$("#output").scrollTop($("#output")[0].scrollHeight);
+	}
+};
+App.prototype.progress = function(json){
+	$("#output").append(json.percentage+" / 100 %\n");
+	$("#output").scrollTop($("#output")[0].scrollHeight);
+};
+
+App.prototype.push = function(file, url){
+	this.butler.call(["push", file, url], true, this.onMessage.bind(this), this.onMessage.bind(this));
+};
+App.prototype.status = function(url){
+	this.butler.call(["status", url], false, this.onMessage.bind(this), this.onMessage.bind(this));
+};

@@ -5,82 +5,63 @@
 var Butler = function(){
 	this.process = "butler";
 	this.busy = false;
-
-	try{
-		child_process.execFile(this.process, ["-V"], function(error, stdout, stderr){
-			if(error){
-				alert("butler error:\n"+error.toString());
-			}
-			$("#version").html((stdout || stderr).toString());
-		});
-	}catch(e){
-		alert("butler error:\n"+e.toString());
-	}
 };
-Butler.prototype.call = function(args){
+
+
+Butler.prototype.call = function(args, async, onData, onError){
+	if(arguments.length < 2){
+		throw "Error: Butler.call takes at least 2 arguments";
+	}
+
 	if(this.busy){
 		alert("butler's already running a process; quit being impatient");
 		return;
 	}
 
+	// prefer JSON format
+	args.push("--json");
+
+	// block future butler calls till this one's done
 	this.busy = true;
-		$("#output").text("");
+	
+	$("#output").text("");
 
 	try{
-		var child = child_process.spawn(this.process, args);
+		if(async){
+			var child = child_process.spawn(this.process, args);
 
-		child.stdout.on("data", this.onData.bind(this));
-		child.stderr.on("data", this.onError.bind(this));
-		child.on("close", this.onClose.bind(this));
+			// pass output to handlers
+			if(onData){
+				child.stdout.on("data", onData);
+			}if(onError){
+				child.stderr.on("data", onError);
+			}
+
+			// unblock on child process close
+			child.on("close", this.onClose.bind(this));
+		}else{
+			var child = child_process.spawnSync(this.process, args);
+
+			// sync command is unblocked immediately
+			this.busy = false;
+
+			// pass output to handlers
+			if(onData){
+				onData(child.stdout);
+			}if(onError){
+				onError(child.stderr);
+			}
+		}
 	}catch(e){
+		// TODO: something better than this :/
 		alert("butler error:\n"+e.toString());
 
+		// unblock on error
 		this.busy = false;
 	}
+	
 };
 
-Butler.prototype.push = function(file, url){
-	this.call(["push", file, url]);
-};
-Butler.prototype.status = function(url){
-	this.call(["status", url]);
-};
-
-Butler.prototype.onData = function(data){
-	var s = data.toString();
-
-	s = s.replace(/\n/g, "<br>");
-	s = s.replace(/ /g, "&nbsp;");
-
-	s = $("#output").html() + s;
-
-	var a = s.split("\r");
-	s = "";
-	while(a.length > 1){
-		var c = a.shift();
-		s += c.substr(0, c.lastIndexOf("<br>")+4);
-	}
-	s += a.shift();
-
-	/*for(var i = 0; i < data.length; ++i){
-		var c = String.fromCodePoint(data[i]);
-		console.log(data[i], c);
-		if(c == "\n"){
-			s += "<br>";
-		}if(c == " "){
-			s += "&nbsp;";
-		}else if(c == "\r"){
-			s = s.substring(0, s.lastIndexOf("<br>"))+"<br>";
-		}else{
-			s += c;
-		}
-	}*/
-	$("#output").html(s);
-	$("#output").scrollTop($("#output")[0].scrollHeight);
-};
-Butler.prototype.onError = function(data){
-	this.onData(data);
-};
 Butler.prototype.onClose = function(code){
 	this.busy = false;
 };

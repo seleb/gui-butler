@@ -1,6 +1,8 @@
 // jquery!
 window.$ = window.jQuery = require("jquery");
 
+
+
 $(document).ready(function(){
 
 	// get some of the stuff we need for later
@@ -8,7 +10,6 @@ $(document).ready(function(){
 	child_process = require("child_process");
 
 	var app = new App();
-	var butler = new Butler();
 
 
     // open links externally by default
@@ -89,14 +90,14 @@ $(document).ready(function(){
 	});
 
 	$("#btnPush").on("click",function(event){
-	 	butler.push(
+	 	app.push(
 	 		$("#selectedFile").text(),
 	 		app.getProjectUrl()
 	 	);
 	});
 
 	$("#btnCheckStatus").on("click",function(event){
-	 	butler.status(app.getProjectUrl());
+	 	app.status(app.getProjectUrl());
 	});
 
 
