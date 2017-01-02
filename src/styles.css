@@ -87,9 +87,9 @@ body{
 }
 
 button{
+	position:relative;
 	padding: 5px;
-	border: 0;
-	border-bottom: solid 1px white;
+	border: 1px solid #e15353;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -98,18 +98,13 @@ button{
 	background-color: #fa5c5c;
 	vertical-align: middle;
 }
-
+button:active{
+	top:1px;
+}
 button:disabled{
-	padding: 5px;
-	border: 0;
-	border-bottom: solid 1px white;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	font-weight: bold;
 	color: #FFF;
 	background-color: #d0d0d0;
-	vertical-align: middle;
+	border-color:#d0d0d0;
 	cursor: not-allowed;
 }
 
@@ -271,6 +266,12 @@ input:focus,
 button:focus,
 select:focus{
 	outline-color: #fa5c5c;
+
+}
+input:focus:active,
+button:focus:active,
+select:focus:active{
+	outline: none;
 }
 
 .input-block{
