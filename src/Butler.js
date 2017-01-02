@@ -3,7 +3,7 @@
 ////////////
 
 var Butler = function(){
-	this.process = "butler";
+	this.process = require("path").resolve(__dirname, "butler");
 	this.busy = false;
 };
 
