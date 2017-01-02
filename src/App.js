@@ -315,6 +315,11 @@ App.prototype.json_progress = function(json){
 	// TODO: format ETA
 	$("#progressBar div").width(json.percentage+"%");
 	$("#eta").val(json.eta);
+
+	if(json.progress == 1){
+		// complete
+		$("#progressBar").removeClass("active");
+	}
 };
 App.prototype.json_login = function(json){
 	// attempting to login

@@ -94,6 +94,7 @@ $(document).ready(function(){
 	 		$("#selectedFile").text(),
 	 		app.getProjectUrl()
 	 	);
+		$("#progressBar").addClass("active");
 	});
 
 	$("#btnCheckStatus").on("click",function(event){
