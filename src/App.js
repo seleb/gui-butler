@@ -339,7 +339,17 @@ App.prototype.json_login = function(json){
 App.prototype.json_result = function(json){
 	// finished logging in
 	if(json.value.status == "success"){
-		$("section#login").slideDown();
+
+		// get login details
+		$("#key").val(window.localStorage.getItem("key"));
+		if(window.localStorage.getItem("rememberMe") == "1"){
+			$("#rememberMe").prop("checked", true);
+
+			// auto-login
+			$("#login button").trigger("click");
+		}else{
+			$("section#login").slideDown();
+		}
 	}else{
 		// TODO: idk; haven't actually tested the fail case yet
 		alert(json);

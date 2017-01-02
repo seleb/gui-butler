@@ -67,15 +67,6 @@ $(document).ready(function(){
 		app.logout();
 	});
 
-	// get login details
-	$("#key").val(window.localStorage.getItem("key"));
-	if(window.localStorage.getItem("rememberMe") == "1"){
-		$("#rememberMe").prop("checked", true);
-
-		// auto-login
-		$("#login button").trigger("click");
-	}
-
 	$("#userSelect").on("change", function(event){
 		app.selectUser($("#userSelect option:selected").val());
 	});
