@@ -32,19 +32,13 @@ App.prototype.login = function(key, user, rememberMe){
 		
 		if(data.errors){
 			// error when submitting API key
-			
-			alert(data.errors.toString());
-			$("#btnLogin").prop("disabled",false);
-
+			this.failLogin(data.errors.toString());
 			return;
 		}
 
 		if(data.games.length <= 0){
 			// the user has nothing associated with their key
-			
-			alert("Error: couldn't find any projects associated with this key. gui-butler can only push builds to existing projects; you need to use itch.io to actually create them.");
-			$("#btnLogin").prop("disabled",false);
-
+			this.failLogin("Error: couldn't find any projects associated with this key. gui-butler only pushes builds to existing projects; you need to use itch.io or the official app to actually create them.");
 			return;
 		}
 
@@ -103,11 +97,19 @@ App.prototype.login = function(key, user, rememberMe){
 
 		$("section#selectUser").slideDown();
 	}.bind(this)).fail(function(){
-		$("#btnLogin").prop("disabled",false);
-
-		// couldn't get a response
-		alert("Error: itch.io failed to respond. Check your internet connection etc.");
+		this.failLogin("Error: itch.io failed to respond. Check your internet connection etc.");
 	}.bind(this));
+};
+
+App.prototype.failLogin = function(error){
+	// display error
+	// TODO: something nicer than an alert
+	alert(error);
+
+	// make sure the login section is visible and interactable
+	// so the user can change info and try again
+	$("#btnLogin").prop("disabled",false);
+	$("section#login").slideDown();
 };
 
 App.prototype.logout = function(){
