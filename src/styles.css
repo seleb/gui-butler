@@ -127,7 +127,6 @@ div#main{
 	margin:0;
 	overflow:auto;
 	padding:5px;
-	white-space: pre-wrap;
 
 	position: absolute;
 	top:3rem;
