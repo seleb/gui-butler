@@ -36,7 +36,7 @@ App.prototype.login = function(key, user, rememberMe){
 			return;
 		}
 
-		if(data.games.length <= 0){
+		if(!data.games.hasOwnProperty("length") || data.games.length <= 0){
 			// the user has nothing associated with their key
 			this.failLogin("Error: couldn't find any projects associated with this key. gui-butler only pushes builds to existing projects; you need to use itch.io or the official app to actually create them.");
 			return;
