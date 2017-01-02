@@ -54,13 +54,14 @@ App.prototype.login = function(key, user, rememberMe){
 
 		if(rememberMe){
 			// save login details to local storage
-			// TODO: also save the index of currently selected user/project; it gets kind of annoying to have to re-select if you're opening/closing frequently
 			window.localStorage.setItem("key", key);
 			window.localStorage.setItem("rememberMe", "1");
 		}else{
 			// clear login details from local storage
 			window.localStorage.setItem("key", "");
 			window.localStorage.setItem("rememberMe", "0");
+			window.localStorage.setItem("userIdx", "0");
+			window.localStorage.setItem("projectIdx", "0");
 		}
 
 
@@ -98,7 +99,7 @@ App.prototype.login = function(key, user, rememberMe){
 
 		// auto-select the first user in the dropdown
 		// (provides a bit of feedback + removes the need for a null entry)
-		$("#userSelect").val("0").change();
+		$("#userSelect").val(window.localStorage.getItem("userIdx")).change();
 
 		$("section#selectUser").slideDown();
 	}.bind(this)).fail(function(){
@@ -138,9 +139,14 @@ App.prototype.selectUser = function(idx){
 	}
 	$("#projectSelect").html(s);
 
+	// save selection to localStorage
+	if(window.localStorage.getItem("rememberMe") == 1){
+		window.localStorage.setItem("userIdx", idx);
+	}
+
 	// auto-select the first game in the dropdown
 	// (provides a bit of feedback + removes the need for a null entry)
-	$("#projectSelect").val("0").change();
+	$("#projectSelect").val(window.localStorage.getItem("projectIdx")).change();
 
 	$("#selectProject").slideDown();
 };
@@ -158,6 +164,11 @@ App.prototype.selectProject = function(idx){
 
 	// update link
 	$("#projectUrl").attr("href", this.selectedProject.url);
+
+	// save selection to localStorage
+	if(window.localStorage.getItem("rememberMe") == 1){
+		window.localStorage.setItem("projectIdx", idx);
+	}
 
 	$("#selectBuild").slideDown();
 };
