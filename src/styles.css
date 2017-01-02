@@ -114,18 +114,38 @@ button:disabled{
 }
 
 div#main{
-	bottom:3em;
 	overflow:auto;
+
 	position:absolute;
-	top:3em;
-	width:inherit;
+	top:3rem;
+	bottom:3rem;
+	left:0;
+	right:40%;
+}
+
+#output{
+	display:block;
+	background:#666;
+	box-sizing:border-box;
+	color:#FFF;
+	font-family:monospace;
+	margin:0;
+	overflow:auto;
+	padding:5px;
+	white-space: pre-wrap;
+
+	position: absolute;
+	top:3rem;
+	bottom:3rem;
+	left:60%;
+	right:0;
 }
 
 footer{
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
 	bottom:0;
-	height:3em;
+	height:3rem;
 	text-align:center;
 }
 
@@ -142,7 +162,7 @@ header{
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
 	box-sizing:border-box;
-	height:3em;
+	height:3rem;
 	padding-left:1em;
 	top:0;
 }
@@ -158,9 +178,9 @@ header h1 span{
 	background:url("favicon.png");
 	background-size:100% 100%;
 	display:inline-block;
-	height:3em;
+	height:3rem;
 	vertical-align:middle;
-	width:3em;
+	width:3rem;
 
 	-webkit-transition: transform 1.0s cubic-bezier(.43,.99,.08,1.09);
 	-webkit-app-region: no-drag;
@@ -272,20 +292,6 @@ label{
 	overflow:hidden;
 	white-space: nowrap;
 	cursor:pointer;
-}
-
-#output{
-	display:block;
-	background:#666;
-	border-radius:3px;
-	box-sizing:border-box;
-	color:#FFF;
-	font-family:monospace;
-	height:16em;
-	margin:0;
-	overflow:auto;
-	padding:5px;
-	white-space: pre-wrap;
 }
 
 section{
