@@ -97,7 +97,7 @@ App.prototype.login = function(key, user, rememberMe){
 
 		$("section#selectUser").slideDown();
 	}.bind(this)).fail(function(){
-		this.failLogin("Error: itch.io failed to respond. Check your internet connection etc.");
+		this.failLogin("Error: itch.io failed to respond. Make sure your web API key has been entered correctly.\nAlso check your internet connection etc.");
 	}.bind(this));
 };
 
