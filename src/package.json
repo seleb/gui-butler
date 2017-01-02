@@ -6,7 +6,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . --appname=gui-butler --icon=favicon.ico --out=..\\bin\\ --platform=win32 --asar --prune --overwrite"
+    "build": "electron-packager . --appname=gui-butler --icon=favicon.ico --out=..\\bin\\ --platform=win32 --arch=x64 --prune --overwrite"
   },
   "author": "Sean S. LeBlanc",
   "devDependencies": {
