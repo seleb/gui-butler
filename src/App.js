@@ -79,11 +79,15 @@ App.prototype.login = function(key, user, rememberMe){
 		var i = 0;
 		for(var u in users){
 			this.users.push(users[u]);
-			s += "<option value=\"" + (i++) + "\">" + users[u].username + "</option>";
+			s += "<option value=\"" + (i++) + "\"" + (i==0 ? " selected " : "") + ">" + users[u].username + "</option>";
 		}
 		$("#userSelect").html(s);
 
 
+		// number of users may have changed since last login
+		if(parseInt(window.localStorage.getItem("userIdx")||"0",10) >= this.users.length){
+			window.localStorage.setItem("userIdx","0");
+		}
 
 		// update section display
 		$("section#login").slideUp();
@@ -93,7 +97,7 @@ App.prototype.login = function(key, user, rememberMe){
 
 		// auto-select the first user in the dropdown
 		// (provides a bit of feedback + removes the need for a null entry)
-		$("#userSelect").val(window.localStorage.getItem("userIdx")).change();
+		$("#userSelect").val(window.localStorage.getItem("userIdx")||"0").change();
 
 		$("section#selectUser").slideDown();
 	}.bind(this)).fail(function(){
@@ -137,18 +141,23 @@ App.prototype.selectUser = function(idx){
 	s="";
 	for(var i = 0; i < this.projects.length; ++i){
 		var g = this.projects[i];
-		s += "<option value=\"" + i + "\">" + g.title + "</option>";
+		s += "<option value=\"" + i + "\"" + (i==0 ? " selected " : "") + ">" + g.title + "</option>";
 	}
 	$("#projectSelect").html(s);
 
+	// number of projects may have changed since last login
+	if(parseInt(window.localStorage.getItem("projectIdx")||"0",10) >= this.projects.length){
+		window.localStorage.setItem("projectIdx","0");
+	}
+
 	// save selection to localStorage
-	if(window.localStorage.getItem("rememberMe") == 1){
+	if((window.localStorage.getItem("rememberMe")||"0") == "1"){
 		window.localStorage.setItem("userIdx", idx);
 	}
 
 	// auto-select the first game in the dropdown
 	// (provides a bit of feedback + removes the need for a null entry)
-	$("#projectSelect").val(window.localStorage.getItem("projectIdx")).change();
+	$("#projectSelect").val(window.localStorage.getItem("projectIdx")||"0").change();
 
 	$("#selectProject").slideDown();
 };
@@ -168,7 +177,7 @@ App.prototype.selectProject = function(idx){
 	$("#projectUrl").attr("href", this.selectedProject.url);
 
 	// save selection to localStorage
-	if(window.localStorage.getItem("rememberMe") == 1){
+	if(window.localStorage.getItem("rememberMe")||"0" == "1"){
 		window.localStorage.setItem("projectIdx", idx);
 	}
 
@@ -344,7 +353,7 @@ App.prototype.json_result = function(json){
 
 		// get login details
 		$("#key").val(window.localStorage.getItem("key"));
-		if(window.localStorage.getItem("rememberMe") == "1"){
+		if((window.localStorage.getItem("rememberMe") || "0") == "1"){
 			$("#rememberMe").prop("checked", true);
 
 			// auto-login
