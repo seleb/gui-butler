@@ -377,3 +377,19 @@ App.prototype.json_result = function(json){
 App.prototype.json_error = function(json){
 	alert(json.message);
 };
+App.prototype.json_yesno = function(json){
+	var choice = remote.dialog.showMessageBox(win, {
+		type: "question",
+		buttons: ["Yes", "No"],
+		title: "butler has a question:",
+		message: json.question
+	});
+
+	if(choice === 0){
+		// yes
+		this.butler.child.stdin.write("{\"response\":true}\n");
+	}else{
+		// no
+		this.butler.child.stdin.write("{\"response\":false}\n");
+	}
+};
