@@ -5,6 +5,7 @@
 var Butler = function(){
 	this.process = require("path").resolve(__dirname, "butler");
 	this.busy = false;
+	this.child = null;
 };
 
 
@@ -28,25 +29,25 @@ Butler.prototype.call = function(args, async, onData, onError, onClose){
 
 	try{
 		if(async){
-			var child = child_process.spawn(this.process, args);
+			this.child = child_process.spawn(this.process, args);
 
 			// pass output to handlers
 			if(onData){
-				child.stdout.on("data", onData);
+				this.child.stdout.on("data", onData);
 			}if(onError){
-				child.stderr.on("data", onError);
+				this.child.stderr.on("data", onError);
 			}
 
 			// unblock on child process close
-			child.on("close", this._onClose.bind(this));
+			this.child.on("close", this._onClose.bind(this));
 		}else{
-			var child = child_process.spawnSync(this.process, args);
+			this.child = child_process.spawnSync(this.process, args);
 
 			// pass output to handlers
 			if(onData){
-				onData(child.stdout);
+				onData(this.child.stdout);
 			}if(onError){
-				onError(child.stderr);
+				onError(this.child.stderr);
 			}
 
 			// sync command is unblocked immediately
@@ -64,6 +65,7 @@ Butler.prototype.call = function(args, async, onData, onError, onClose){
 
 Butler.prototype._onClose = function(code){
 	this.busy = false;
+	this.child = null;
 	if(this.onClose){
 		this.onClose(code);
 	}
