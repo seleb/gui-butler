@@ -300,7 +300,7 @@ App.prototype.butler_version = function(){
 	});
 };
 App.prototype.butler_upgrade = function(){
-	this.butler.call(["upgrade","--assume-yes"], true, this.onMessage.bind(this), this.onMessage.bind(this));
+	this.butler.call(["upgrade"], true, this.onMessage.bind(this), this.onMessage.bind(this));
 };
 
 
