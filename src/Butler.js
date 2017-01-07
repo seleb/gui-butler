@@ -8,7 +8,7 @@ var Butler = function(){
 };
 
 
-Butler.prototype.call = function(args, async, onData, onError){
+Butler.prototype.call = function(args, async, onData, onError, onClose){
 	if(arguments.length < 2){
 		throw "Error: Butler.call takes at least 2 arguments";
 	}
@@ -24,6 +24,8 @@ Butler.prototype.call = function(args, async, onData, onError){
 	// block future butler calls till this one's done
 	this.busy = true;
 
+	this.onClose = onClose;
+
 	try{
 		if(async){
 			var child = child_process.spawn(this.process, args);
@@ -36,12 +38,9 @@ Butler.prototype.call = function(args, async, onData, onError){
 			}
 
 			// unblock on child process close
-			child.on("close", this.onClose.bind(this));
+			child.on("close", this._onClose.bind(this));
 		}else{
 			var child = child_process.spawnSync(this.process, args);
-
-			// sync command is unblocked immediately
-			this.busy = false;
 
 			// pass output to handlers
 			if(onData){
@@ -49,6 +48,9 @@ Butler.prototype.call = function(args, async, onData, onError){
 			}if(onError){
 				onError(child.stderr);
 			}
+
+			// sync command is unblocked immediately
+			this._onClose();
 		}
 	}catch(e){
 		// TODO: something better than this :/
@@ -60,6 +62,9 @@ Butler.prototype.call = function(args, async, onData, onError){
 	
 };
 
-Butler.prototype.onClose = function(code){
+Butler.prototype._onClose = function(code){
 	this.busy = false;
+	if(this.onClose){
+		this.onClose(code);
+	}
 };
