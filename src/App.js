@@ -13,12 +13,13 @@ var App = function(){
 	this.butler = new Butler();
 
 
-	
-	this.butler_version();
-	this.butler_login();
+	this.butler_upgrade();
 
-	// TODO: notify user if copy of butler is out of date
-	// and/or tell butler to update itself
+	this.butler.onClose=function(){
+		this.butler_version();
+		this.butler_login();
+		this.butler.onClose=null;
+	}.bind(this);
 };
 
 App.prototype.login = function(key, user, rememberMe){
@@ -297,6 +298,9 @@ App.prototype.butler_version = function(){
 	this.butler.call(["-V"], false, null, function(stderr){
 		$("#version").html(stderr.toString());
 	});
+};
+App.prototype.butler_upgrade = function(){
+	this.butler.call(["upgrade","--assume-yes"], true, this.onMessage.bind(this), this.onMessage.bind(this));
 };
 
 
