@@ -341,6 +341,10 @@ App.prototype.json_progress = function(json){
 	if(json.progress == 1){
 		// complete
 		$("#progressBar").removeClass("active");
+		$("#progress").slideUp();
+	}else{
+		$("#progressBar").addClass("active");
+		$("#progress").slideDown();
 	}
 };
 App.prototype.json_login = function(json){
