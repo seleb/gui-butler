@@ -70,3 +70,10 @@ Butler.prototype._onClose = function(code){
 		this.onClose(code);
 	}
 };
+
+Butler.prototype.yes = function(){
+	this.child.stdin.write("{\"response\":true}\n");
+};
+Butler.prototype.no = function(){
+	this.child.stdin.write("{\"response\":false}\n");
+};

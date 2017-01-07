@@ -386,10 +386,8 @@ App.prototype.json_yesno = function(json){
 	});
 
 	if(choice === 0){
-		// yes
-		this.butler.child.stdin.write("{\"response\":true}\n");
+		this.butler.yes();
 	}else{
-		// no
-		this.butler.child.stdin.write("{\"response\":false}\n");
+		this.butler.no();
 	}
 };
