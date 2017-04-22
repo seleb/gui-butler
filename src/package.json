@@ -10,7 +10,7 @@
   },
   "author": "Sean S. LeBlanc",
   "devDependencies": {
-    "electron": "^1.4.1",
+    "electron": "^1.6.5",
     "electron-packager": "^8.4.0",
     "electron-prebuilt": "~1.4.13"
   },
