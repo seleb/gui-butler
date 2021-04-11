@@ -76,6 +76,9 @@ body {
 	padding: 0;
 	position: relative;
 	width: 100%;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: 1fr auto;
 }
 
 button {
@@ -104,15 +107,10 @@ button:disabled {
 
 div#main {
 	overflow: auto;
-
-	position: absolute;
-	top: 0;
-	bottom: 3rem;
-	left: 0;
-	right: 40%;
 }
 
 #output {
+	min-width: 20rem;
 	display: block;
 	background: #666;
 	color: #FFF;
@@ -120,15 +118,10 @@ div#main {
 	margin: 0;
 	overflow: auto;
 	padding: 5px;
-
-	position: absolute;
-	top: 0;
-	bottom: 3rem;
-	left: 60%;
-	right: 0;
 }
 
 footer {
+	grid-column: 1 / -1;
 	display: flex;
 	flex-direction: column;
 	gap: 0.25rem;
@@ -138,10 +131,6 @@ footer {
 	background: #F4F4F4;
 	border-top: 1px solid #dadada;
 	color: #666;
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	right: 0;
 }
 
 footer ul {
