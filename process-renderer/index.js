@@ -1,10 +1,5 @@
-// jquery!
-window.$ = window.jQuery = require("jquery");
-
 $(document).ready(async function(){
-	const { App } = require('./App');
-	app = new App();
-
+	app = new window.App();
 
 
 	////////////////

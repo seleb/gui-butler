@@ -1,4 +1,4 @@
-class App {
+window.App = class App {
 	constructor() {
 		this.users = null;
 		this.selectedUserIdx = null;
@@ -332,7 +332,3 @@ class App {
 		alert(message.message);
 	}
 }
-
-module.exports = {
-	App,
-};
