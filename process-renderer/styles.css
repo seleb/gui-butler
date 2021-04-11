@@ -166,6 +166,8 @@ select,
 	border-radius: 3px;
 	margin-top: 2px;
 	margin-bottom: 2px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 input[type="checkbox"] {
