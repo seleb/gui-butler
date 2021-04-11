@@ -1,14 +1,16 @@
 * {
 	box-sizing: border-box;
 	/* interactivity */
-	-webkit-user-select: none;
+	user-select: none;
 	cursor: default;
 }
 
 a,
 button,
 select,
-input {
+input,
+[role="button"] {
+	user-select: initial;
 	cursor: pointer;
 }
 
@@ -137,9 +139,11 @@ footer ul {
 	list-style: none;
 	display: inline;
 }
+
 footer ul li {
 	display: inline;
 }
+
 footer ul li:not(:last-child)::after {
 	content: ' | ';
 }
@@ -155,12 +159,7 @@ html {
 input,
 select,
 #selectedFile {
-	font-size: 1em;
-	-webkit-user-select: default;
-	display: inline-block;
-	max-width: 50%;
-	width: 35em;
-	vertical-align: middle;
+	width: 100%;
 	padding: 2px;
 	text-align: left;
 	border: solid 1px #dadada;
@@ -186,31 +185,34 @@ select:focus:active {
 	outline: none;
 }
 
-.input-block {
-	display: block;
-	white-space: nowrap;
-	max-width: 100%;
-}
-
-label {
-	display: inline-block;
-	width: 10em;
-	text-align: right;
-	margin-right: 1em;
-}
-
-#selectedFile {
-	display: inline-block;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	cursor: pointer;
-}
-
-section {
+fieldset {
+	border: none;
 	border-bottom: 1px solid #dadada;
-	padding: 1em;
-	display: none;
+	padding: 1rem 0.5rem;
+	display: grid;
+	grid-template-columns: 8rem 1fr;
+	/* fixes issue with legend taking up grid space */
+	grid-template-rows: 0;
+	grid-gap: 0.25rem 0.5rem;
+	align-items: center;
+}
+
+fieldset legend {
+	font-weight: bold;
+	padding-top: 0.5rem;
+}
+
+fieldset legend,
+fieldset .fill {
+	grid-column: 1 / -1;
+}
+
+fieldset label {
+	text-align: right;
+}
+
+fieldset a.fill {
+	text-align: center;
 }
 
 #progressBar {

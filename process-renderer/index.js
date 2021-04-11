@@ -1,4 +1,6 @@
 $(document).ready(async function () {
+	$('fieldset').hide();
+
 	app = new window.App();
 
 	////////////////

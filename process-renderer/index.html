@@ -3,7 +3,8 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://itch.io; img-src https://img.itch.zone">
+	<meta http-equiv="Content-Security-Policy"
+		content="default-src 'self'; connect-src https://itch.io; img-src https://img.itch.zone">
 	<title>gui-butler</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,52 +15,37 @@
 </head>
 
 <body>
-	<pre id="output"></pre>
-
 	<div id="main">
-		<section id="login">
-			<div class="input-block">
-				<label for="key">Web API Key:</label>
-				<input type="password" name="key" id="key" value="" />
-			</div>
-			<div class="input-block">
-				<label for="rememberMe">Remember me:</label>
-				<input type="checkbox" name="rememberMe" id="rememberMe" />
-			</div>
-			<div class="input-block">
-				<label></label>
-				<button id="btnLogin">Submit Key</button>
-			</div>
-			<div class="input-block">
-				<label></label>
-				<a href="https://itch.io/api-keys">I don't have a web API key</a>
-			</div>
-		</section>
+		<fieldset id="login">
+			<legend>Login</legend>
 
-		<section id="logout">
-			<label></label>
-			<button id="btnLogout">Change API Key</button>
-		</section>
+			<label for="key">Web API Key:</label>
+			<input type="password" name="key" id="key" value="" />
 
+			<label for="rememberMe">Remember me:</label>
+			<input type="checkbox" name="rememberMe" id="rememberMe" />
 
-		<section id="selectUser">
-			<div class="input-block">
-				<label for="userSelect">Account</label>
-				<select name="userSelect" id="userSelect"></select>
-			</div>
-			<div class="input-block">
-				<label></label>
-				<a href="" id="userPreview">view on itch.io</a>
-			</div>
-		</section>
+			<button class="fill" id="btnLogin">Submit Key</button>
+			<a class="fill" href="https://itch.io/api-keys">I don't have a web API key</a>
+		</fieldset>
 
-		<section id="selectProject">
-			<div class="input-block">
-				<label for="projectSelect">Project</label>
-				<select name="projectSelect" id="projectSelect"></select>
-			</div>
+		<fieldset id="logout">
+			<legend>Logout</legend>
+			<button class="fill" id="btnLogout">Change API Key</button>
+		</fieldset>
 
-			<div id="projectPreview">
+		<fieldset id="selectUser">
+			<legend>User</legend>
+			<select class="fill" name="userSelect" id="userSelect"></select>
+			<a class="fill" href="" id="userPreview">view on itch.io</a>
+		</fieldset>
+
+		<fieldset id="selectProject">
+			<legend>Project</legend>
+
+			<select class="fill" name="projectSelect" id="projectSelect"></select>
+
+			<div class="fill" id="projectPreview">
 				<img id="projectCover" src="" width="64px" height="50px" alt="project cover">
 				<div id="projectPreviewText">
 					<span id="projectTitle">project title</span> - <span id="projectText">project text</span>
@@ -67,55 +53,48 @@
 					<a id="projectUrl" href="">view on itch.io</a>
 				</div>
 			</div>
-		</section>
+		</fieldset>
 
-		<section id="selectBuild">
-			<div class="input-block">
-				<label>Select .zip:</label>
-				<span id="selectedFile">no .zip selected&hellip;</span>
-			</div>
+		<fieldset id="selectBuild">
+			<legend>Build</legend>
 
-			<div class="input-block">
-				<label for="channelWin">Windows:</label>
-				<input type="checkbox" name="channelWin" id="channelWin" />
-			</div>
-			<div class="input-block">
-				<label for="channelOsx">OSX:</label>
-				<input type="checkbox" name="channelOsx" id="channelOsx" />
-			</div>
-			<div class="input-block">
-				<label for="channelLinux">Linux:</label>
-				<input type="checkbox" name="channelLinux" id="channelLinux" />
-			</div>
-			<div class="input-block">
-				<label for="channelOther">Other:</label>
-				<input type="text" name="channelOther" id="channelOther" value=""
-					placeholder="more-dash-separated-channels" />
-			</div>
-		</section>
+			<label for="selectedFile">Select .zip:</label>
+			<span role="button" id="selectedFile">no .zip selected&hellip;</span>
 
-		<section id="pushBuild">
-			<div class="input-block">
-				<label for="targetPreview">Target:</label>
-				<input type="text" name="targetPreview" id="targetPreview" value="" readonly />
-			</div>
+			<label for="channelWin">Windows:</label>
+			<input type="checkbox" name="channelWin" id="channelWin" />
 
-			<div class="input-block">
-				<label></label>
-				<button id="btnPush" disabled>Push Build</button>
-				<button id="btnCheckStatus" disabled>Check Build Status</button>
-			</div>
-		</section>
-		<section id="progress">
-			<div class="input-block">
-				<label for="eta">ETA:</label>
-				<input type="text" name="eta" id="eta" value="" readonly />
-			</div>
-			<div id="progressBar">
+			<label for="channelOsx">OSX:</label>
+			<input type="checkbox" name="channelOsx" id="channelOsx" />
+
+			<label for="channelLinux">Linux:</label>
+			<input type="checkbox" name="channelLinux" id="channelLinux" />
+
+			<label for="channelOther">Other:</label>
+			<input type="text" name="channelOther" id="channelOther" value=""
+				placeholder="more-dash-separated-channels" />
+
+			<label for="targetPreview">Target:</label>
+			<input type="text" name="targetPreview" id="targetPreview" value="" readonly />
+		</fieldset>
+
+		<fieldset id="pushBuild">
+			<legend>Upload</legend>
+
+			<button class="fill" id="btnPush" disabled>Push Build</button>
+			<button class="fill" id="btnCheckStatus" disabled>Check Build Status</button>
+		</fieldset>
+		<fieldset id="progress">
+			<legend>Progress</legend>
+			<label for="eta">ETA:</label>
+			<input type="text" name="eta" id="eta" value="" readonly />
+
+			<div class="fill" id="progressBar">
 				<div></div>
 			</div>
-		</section>
+		</fieldset>
 	</div>
+	<pre id="output"></pre>
 
 	<footer>
 		<nav>
