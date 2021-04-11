@@ -132,8 +132,6 @@ window.App = class App {
 
 		$('#btnLogin').prop('disabled', false);
 
-		$('#selectedFile').html('no .zip selected&hellip;');
-
 		$('#logout').hide();
 		$('#selectProject').hide();
 		$('#selectBuild').hide();
@@ -195,16 +193,9 @@ window.App = class App {
 
 		$('#selectBuild').show();
 	}
-	async selectFile() {
-		// prompt user to select a .zip archive
-		const { canceled, filePaths } = await api.invoke('open-dialog', {
-			title: 'Select build archive',
-			filters: [{ name: 'Build Archive', extensions: ['zip'] }],
-			properties: ['openFile'],
-		});
-		if (!canceled && filePaths && filePaths.length == 1) {
-			this.selectedFile = filePaths[0];
-			$('#selectedFile').text(this.selectedFile);
+	async selectFile(file) {
+		if (file) {
+			this.selectedFile = file.path;
 			$('#pushBuild').show();
 
 			// if there aren't already any channels set
@@ -239,7 +230,7 @@ window.App = class App {
 					$('#channelOther').trigger('change');
 				}
 			}
-		} else if ($('#selectedFile').text().length <= 0) {
+		} else {
 			// canceled selection
 			$('#pushBuild').hide();
 		}

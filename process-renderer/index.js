@@ -27,12 +27,12 @@ $(document).ready(async function () {
 		app.validate();
 	});
 
-	$('#selectedFile').on('click', function (event) {
-		app.selectFile();
+	$('#selectedFile').on('change', function (event) {
+		app.selectFile(event.currentTarget.files[0]);
 	});
 
 	$('#btnPush').on('click', function (event) {
-		app.butler_push($('#selectedFile').text(), app.getProjectUrl());
+		app.butler_push(app.selectedFile, app.getProjectUrl());
 	});
 
 	$('#btnCheckStatus').on('click', function (event) {

@@ -61,7 +61,3 @@ ipcMain.handle('butler', async (event, ...args) => {
 	butler.removeAllListeners();
 	return parseMessages(data.toString()).pop();
 });
-
-ipcMain.handle('open-dialog', async (_, options) => {
-	return dialog.showOpenDialog(options);
-});
