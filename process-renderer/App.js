@@ -295,7 +295,9 @@ window.App = class App {
 		await api.invoke('butler', 'login');
 	}
 	async butler_push(file, url) {
+		$('#progress').show();
 		await api.invoke('butler', 'push', file, url);
+		$('#progress').hide();
 	}
 	async butler_status(url) {
 		await api.invoke('butler', 'status', url);
@@ -321,10 +323,8 @@ window.App = class App {
 		if (message.progress == 1) {
 			// complete
 			$('#progressBar').removeClass('active');
-			$('#progress').hide();
 		} else {
 			$('#progressBar').addClass('active');
-			$('#progress').show();
 		}
 	}
 	onButlerError(message) {
