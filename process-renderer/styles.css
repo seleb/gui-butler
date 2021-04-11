@@ -133,12 +133,19 @@ div#main {
 footer {
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
-	bottom: 0;
 	height: 3rem;
 	text-align: center;
+	font-size: smaller;
+	background: #F4F4F4;
+	border: 1px solid #dadada;
+	color: #666;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 
-footer sub {
+footer > * {
 	display: block;
 	width: 100%;
 	overflow: hidden;
@@ -147,13 +154,15 @@ footer sub {
 	margin-top: 2px;
 }
 
-footer {
-	background: #F4F4F4;
-	border: 1px solid #dadada;
-	color: #666;
-	left: 0;
-	position: fixed;
-	right: 0;
+footer ul {
+	list-style: none;
+	display: inline;
+}
+footer ul li {
+	display: inline;
+}
+footer ul li:not(:last-child)::after {
+	content: ' | ';
 }
 
 html {
