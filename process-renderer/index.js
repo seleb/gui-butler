@@ -22,33 +22,6 @@ $(document).ready(function(){
     });
 
 
-    ///////////////////
-    // FRAME BUTTONS //
-    ///////////////////
-	win = remote.getCurrentWindow();
-
-	win.on("maximize", function(){
-		$("html").addClass("maximized");
-	});
-	win.on("unmaximize", function(){
-		$("html").removeClass("maximized");
-	});
-
-	$("#btnMinimize").on("click",function(event){
-		win.minimize();
-	});
-	$("#btnMaximize").on("click",function(event){
-		if(win.isMaximized()){
-			win.unmaximize();
-		}else{
-			win.maximize();
-		}
-	});
-	$("#btnExit").on("click",function(event){
-		remote.app.exit();
-	});
-
-
 	////////////////
 	// MAIN STUFF //
 	////////////////
