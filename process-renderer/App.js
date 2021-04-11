@@ -28,7 +28,7 @@ window.App = class App {
 			// auto-login
 			$('#login button').trigger('click');
 		} else {
-			$('section#login').slideDown();
+			$('#login').show();
 		}
 	}
 	login(key, user, rememberMe) {
@@ -96,9 +96,9 @@ window.App = class App {
 						window.localStorage.setItem('userIdx', '0');
 					}
 
-					// update section display
-					$('section#login').slideUp();
-					$('section#logout').slideDown();
+					// update display
+					$('#login').hide();
+					$('#logout').show();
 
 					// auto-select the first user in the dropdown
 					// (provides a bit of feedback + removes the need for a null entry)
@@ -106,7 +106,7 @@ window.App = class App {
 						.val(window.localStorage.getItem('userIdx') || '0')
 						.change();
 
-					$('section#selectUser').slideDown();
+					$('#selectUser').show();
 				}.bind(this)
 			)
 			.fail(
@@ -120,23 +120,23 @@ window.App = class App {
 		// TODO: something nicer than an alert
 		alert(error);
 
-		// make sure the login section is visible and interactable
+		// make sure the login is visible and interactive
 		// so the user can change info and try again
 		$('#btnLogin').prop('disabled', false);
-		$('section#login').slideDown();
+		$('#login').show();
 	}
 	logout() {
-		$('section#login').slideDown();
+		$('#login').show();
 
 		$('#btnLogin').prop('disabled', false);
 
 		$('#selectedFile').html('no .zip selected&hellip;');
 
-		$('section#logout').slideUp();
-		$('section#selectProject').slideUp();
-		$('section#selectBuild').slideUp();
-		$('section#selectUser').slideUp();
-		$('section#pushBuild').slideUp();
+		$('#logout').hide();
+		$('#selectProject').hide();
+		$('#selectBuild').hide();
+		$('#selectUser').hide();
+		$('#pushBuild').hide();
 	}
 	selectUser(idx) {
 		this.selectedUserIdx = parseInt(idx, 10);
@@ -170,7 +170,7 @@ window.App = class App {
 			.val(window.localStorage.getItem('projectIdx') || '0')
 			.change();
 
-		$('#selectProject').slideDown();
+		$('#selectProject').show();
 	}
 	selectProject(idx) {
 		this.selectedProjectIdx = parseInt(idx, 10);
@@ -192,7 +192,7 @@ window.App = class App {
 			window.localStorage.setItem('projectIdx', idx);
 		}
 
-		$('#selectBuild').slideDown();
+		$('#selectBuild').show();
 	}
 	async selectFile() {
 		// prompt user to select a .zip archive
@@ -204,7 +204,7 @@ window.App = class App {
 		if (!canceled && filePaths && filePaths.length == 1) {
 			this.selectedFile = filePaths[0];
 			$('#selectedFile').text(this.selectedFile);
-			$('section#pushBuild').slideDown();
+			$('#pushBuild').show();
 
 			// if there aren't already any channels set
 			// search the filename for "win","osx","linux" and check their boxes
@@ -240,7 +240,7 @@ window.App = class App {
 			}
 		} else if ($('#selectedFile').text().length <= 0) {
 			// canceled selection
-			$('section#pushBuild').slideUp();
+			$('#pushBuild').hide();
 		}
 	}
 	getChannels() {
@@ -321,10 +321,10 @@ window.App = class App {
 		if (message.progress == 1) {
 			// complete
 			$('#progressBar').removeClass('active');
-			$('#progress').slideUp();
+			$('#progress').hide();
 		} else {
 			$('#progressBar').addClass('active');
-			$('#progress').slideDown();
+			$('#progress').show();
 		}
 	}
 	onButlerError(message) {
