@@ -23,11 +23,12 @@ function createWindow() {
 	win.loadURL(`file://${__dirname}/../process-renderer/index.html`);
 
 	// open links externally by default
-	win.webContents.on('new-window', function (e, url) {
-		e.preventDefault();
-		shell.openExternal(url);
+	win.webContents.on('will-navigate', function (e, url) {
+		if (url != win.webContents.getURL()) {
+			e.preventDefault();
+			shell.openExternal(url);
+		}
 	});
-
 	if (!app.isPackaged) {
 		win.toggleDevTools();
 	}
