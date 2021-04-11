@@ -101,7 +101,7 @@ footer ul {
 }
 
 footer ul li {
-	display: inline;
+	display: inline-block;
 }
 
 footer ul li:not(:last-child)::after {
