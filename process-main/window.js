@@ -1,4 +1,5 @@
 const { BrowserWindow, app, shell } = require('electron');
+const path = require('path');
 
 let win;
 function createWindow() {
@@ -16,6 +17,7 @@ function createWindow() {
 			nodeIntegration: true,
 			contextIsolation: false,
 			enableRemoteModule: true,
+			preload: path.join(__dirname, 'preload.js'),
 		},
 	});
 	win.once('ready-to-show', function () {

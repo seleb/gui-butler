@@ -1,9 +1,3 @@
-const { ipcRenderer } = require('electron');
-
-function ipcInvoke(...args) {
-	return ipcRenderer.invoke(...args);
-}
-
 class App {
 	constructor() {
 		this.users = null;
@@ -14,13 +8,13 @@ class App {
 		this.selectedProject = null;
 		this.selectedFile = null;
 
-		ipcRenderer.on('butler:log', (event, ...args) => {
+		api.on('butler:log', (...args) => {
 			this.onButlerLog(...args);
 		});
-		ipcRenderer.on('butler:progress', (event, ...args) => {
+		api.on('butler:progress', (...args) => {
 			this.onButlerProgress(...args);
 		});
-		ipcRenderer.on('butler:error', (event, ...args) => {
+		api.on('butler:error', (...args) => {
 			this.onButlerError(...args);
 		});
 	}
@@ -202,7 +196,7 @@ class App {
 	}
 	async selectFile() {
 		// prompt user to select a .zip archive
-		const { canceled, filePaths } = await ipcInvoke('open-dialog', {
+		const { canceled, filePaths } = await api.invoke('open-dialog', {
 			title: 'Select build archive',
 			filters: [{ name: 'Build Archive', extensions: ['zip'] }],
 			properties: ['openFile'],
@@ -295,16 +289,16 @@ class App {
 	}
 	// calling butler
 	async butler_init() {
-		await ipcInvoke('butler', 'upgrade');
-		const version = await ipcInvoke('butler', 'version');
+		await api.invoke('butler', 'upgrade');
+		const version = await api.invoke('butler', 'version');
 		$('#version').html(version.value.version);
-		await ipcInvoke('butler', 'login');
+		await api.invoke('butler', 'login');
 	}
 	async butler_push(file, url) {
-		await ipcInvoke('butler', 'push', file, url);
+		await api.invoke('butler', 'push', file, url);
 	}
 	async butler_status(url) {
-		await ipcInvoke('butler', 'status', url);
+		await api.invoke('butler', 'status', url);
 	}
 	// receiving messages from butler
 	async onMessage(data) {
