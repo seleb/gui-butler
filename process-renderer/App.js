@@ -303,7 +303,7 @@ App.prototype.butler_upgrade = function(){
 
 
 // receiving messages from butler
-App.prototype.onMessage = function(data){
+App.prototype.onMessage = async function(data){
 	//console.log(data.toString());
 	var messages = data.toString().split("}\n");
 	
@@ -322,7 +322,7 @@ App.prototype.onMessage = function(data){
 			};
 			console.error("JSON parse failed; assuming response was an info log\n",e);
 		}
-		this["json_"+json.type](json);
+		await this["json_"+json.type](json);
 	}
 };
 App.prototype.json_log = function(json){
@@ -374,15 +374,15 @@ App.prototype.json_result = function(json){
 App.prototype.json_error = function(json){
 	alert(json.message);
 };
-App.prototype.json_yesno = function(json){
-	var choice = remote.dialog.showMessageBox(win, {
+App.prototype.json_yesno = async function(json){
+	const { response } = await remote.dialog.showMessageBox(win, {
 		type: "question",
 		buttons: ["Yes", "No"],
 		title: "butler has a question:",
-		message: json.question
+		message: json.question,
 	});
 
-	if(choice === 0){
+	if(response === 0){
 		this.butler.yes();
 	}else{
 		this.butler.no();
