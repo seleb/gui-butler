@@ -261,24 +261,3 @@ section{
     background-position: 120% 0;
   }
 }
-
-
-/* maximized view */
-html.maximized{
-	padding:0;
-}
-
-html.maximized body{
-	border:0;
-	box-shadow: 0;
-}
-
-html.maximized header,
-html.maximized footer,
-html.maximized div#main{
-	margin:0;
-}
-
-html.maximized #btnMaximize{
-	background-image: url("nav_icons_unmaximize.svg");
-}
