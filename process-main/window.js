@@ -1,4 +1,4 @@
-const { BrowserWindow } = require('electron');
+const { BrowserWindow, app } = require('electron');
 
 function createWindow() {
 	win = new BrowserWindow({
@@ -21,6 +21,10 @@ function createWindow() {
 		win.show();
 	});
 	win.loadURL(`file://${__dirname}/../process-renderer/index.html`);
+
+	if (!app.isPackaged) {
+		win.toggleDevTools();
+	}
 }
 
 module.exports = {

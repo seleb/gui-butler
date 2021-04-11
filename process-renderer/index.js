@@ -66,14 +66,4 @@ $(document).ready(function(){
 	 	app.butler_status(app.getProjectUrl());
 	});
 
-
-	// F12 to open devtools and F5 to refresh
-	// TODO: remove this from release builds
-	document.addEventListener("keydown", function (e) {
-		if (e.which === 123) {
-			win.toggleDevTools();
-		} else if (e.which === 116) {
-			location.reload();
-		}
-	});
 });
