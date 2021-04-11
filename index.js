@@ -6,7 +6,8 @@ window.$ = window.jQuery = require("jquery");
 $(document).ready(function(){
 
 	// get some of the stuff we need for later
-	remote = require("electron").remote;
+	// TODO: remove use of remote
+	remote = require("@electron/remote");
 	child_process = require("child_process");
 
 	app = new App();

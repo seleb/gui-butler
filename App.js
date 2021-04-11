@@ -184,55 +184,52 @@ App.prototype.selectProject = function(idx){
 
 	$("#selectBuild").slideDown();
 };
-App.prototype.selectFile = function(){
+App.prototype.selectFile = async function(){
 	// prompt user to select a .zip archive
-	remote.dialog.showOpenDialog(
-	{
+	const { canceled, filePaths} = await remote.dialog.showOpenDialog({
 		title: "Select build archive",
 		filters: [{name: "Build Archive", extensions:["zip"]}],
 		properties: ["openFile"]
-	},
-	function(filenames){
-		if(filenames && filenames.length == 1){
-			this.selectedFile = filenames[0];
-			$("#selectedFile").text(this.selectedFile);
-			$("section#pushBuild").slideDown();
+	});
+	if(!canceled && filePaths && filePaths.length == 1){
+		this.selectedFile = filePaths[0];
+		$("#selectedFile").text(this.selectedFile);
+		$("section#pushBuild").slideDown();
 
-			// if there aren't already any channels set
-			// search the filename for "win","osx","linux" and check their boxes
-			// also search for "web","32","64" and add them to other
-			if(this.getChannels().length == 0){
-				// only use the file and not the whole path to reduce false positives
-				var fileEnd = this.selectedFile.toLowerCase().split(/[\/\\]+/).pop();
-				if(fileEnd.indexOf("win") !== -1){
-					$("#channelWin").trigger("click");
-				}
-				if(fileEnd.indexOf("osx") !== -1){
-					$("#channelOsx").trigger("click");
-				}
-				if(fileEnd.indexOf("linux") !== -1){
-					$("#channelLinux").trigger("click");
-				}
-				if(fileEnd.indexOf("web") !== -1){
-					$("#channelOther").val("web-");
-				}
-				if(fileEnd.indexOf("32") !== -1){
-					$("#channelOther").val($("#channelOther").val()+"32-");
-				}
-				if(fileEnd.indexOf("64") !== -1){
-					$("#channelOther").val($("#channelOther").val()+"64-");
-				}
-				if($("#channelOther").val().substr(-1) == "-"){
-					$("#channelOther").val($("#channelOther").val().slice(0,-1));
-					$("#channelOther").trigger("change");
-				}
+		// if there aren't already any channels set
+		// search the filename for "win","osx","linux" and check their boxes
+		// also search for "web","32","64" and add them to other
+		if(this.getChannels().length == 0){
+			// only use the file and not the whole path to reduce false positives
+			var fileEnd = this.selectedFile.toLowerCase().split(/[\/\\]+/).pop();
+			if(fileEnd.indexOf("win") !== -1){
+				$("#channelWin").trigger("click");
 			}
-
-		}else if($("#selectedFile").text().length <= 0){
-			// canceled selection
-			$("section#pushBuild").slideUp();
+			if(fileEnd.indexOf("osx") !== -1){
+				$("#channelOsx").trigger("click");
+			}
+			if(fileEnd.indexOf("linux") !== -1){
+				$("#channelLinux").trigger("click");
+			}
+			if(fileEnd.indexOf("web") !== -1){
+				$("#channelOther").val("web-");
+			}
+			if(fileEnd.indexOf("32") !== -1){
+				$("#channelOther").val($("#channelOther").val()+"32-");
+			}
+			if(fileEnd.indexOf("64") !== -1){
+				$("#channelOther").val($("#channelOther").val()+"64-");
+			}
+			if($("#channelOther").val().substr(-1) == "-"){
+				$("#channelOther").val($("#channelOther").val().slice(0,-1));
+				$("#channelOther").trigger("change");
+			}
 		}
-	}.bind(this));
+
+	}else if($("#selectedFile").text().length <= 0){
+		// canceled selection
+		$("section#pushBuild").slideUp();
+	}
 };
 App.prototype.getChannels = function(){
 	var channels = "";
