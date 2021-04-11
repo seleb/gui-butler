@@ -33,7 +33,6 @@ $(document).ready(async function () {
 
 	$('#btnPush').on('click', function (event) {
 		app.butler_push($('#selectedFile').text(), app.getProjectUrl());
-		$('#progressBar').addClass('active');
 	});
 
 	$('#btnCheckStatus').on('click', function (event) {

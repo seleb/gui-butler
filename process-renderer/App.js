@@ -316,16 +316,9 @@ window.App = class App {
 	}
 	onButlerProgress(message) {
 		// update on upload progress
+		$('progress').val(message.progress);
 		// TODO: format ETA
-		$('#progressBar div').width(message.percentage + '%');
 		$('#eta').val(message.eta);
-
-		if (message.progress == 1) {
-			// complete
-			$('#progressBar').removeClass('active');
-		} else {
-			$('#progressBar').addClass('active');
-		}
 	}
 	onButlerError(message) {
 		console.error(message);
