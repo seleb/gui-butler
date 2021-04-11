@@ -3,7 +3,7 @@
   "productName": "gui-butler",
   "version": "0.0.1",
   "description": "A GUI wrapper for itch.io's butler CLI",
-  "main": "main.js",
+  "main": "process-main/main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . --appname=gui-butler --icon=favicon.ico --out=bin --platform=win32 --arch=x64 --prune --overwrite",

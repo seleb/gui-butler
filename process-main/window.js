@@ -1,5 +1,5 @@
-const { app, BrowserWindow } = require('electron');
-require('@electron/remote/main').initialize()
+const { BrowserWindow } = require('electron');
+
 function createWindow() {
 	win = new BrowserWindow({
 		useContentSize: true,
@@ -12,14 +12,17 @@ function createWindow() {
 		minWidth: 400,
 		show: false,
 		webPreferences: {
-			nodeIntegration: true, // TODO: remove
-			contextIsolation: false, // TODO: remove
-			enableRemoteModule: true, // TODO: remove
+			nodeIntegration: true,
+			contextIsolation: false,
+			enableRemoteModule: true,
 		},
 	});
 	win.once('ready-to-show', function () {
 		win.show();
 	});
-	win.loadURL(`file://${__dirname}/index.html`);
+	win.loadURL(`file://${__dirname}/../process-renderer/index.html`);
 }
-app.on('ready', createWindow);
+
+module.exports = {
+	createWindow,
+};
