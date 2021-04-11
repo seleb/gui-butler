@@ -45,25 +45,28 @@ body {
 
 button {
 	position: relative;
-	padding: 5px;
-	border: 1px solid #e15353;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	font-weight: bold;
+	padding: 0.2rem;
 	color: #FFF;
-	background-color: #fa5c5c;
+	background-color: #FF2449;
+	border-radius: 0.25rem;
+	border: none;
+	font-weight: bold;
 	vertical-align: middle;
+	transition: background-color 0.1s ease-out;
 }
 
-button:active {
+button:not(:disabled):hover,
+button:not(:disabled):focus {
+	background-color: #FF2E51;
+}
+
+button:not(:disabled):active {
+	background-color: #E1193B;
 	top: 1px;
 }
 
 button:disabled {
-	color: #FFF;
-	background-color: #d0d0d0;
-	border-color: #d0d0d0;
+	opacity: 0.5;
 	cursor: not-allowed;
 }
 
