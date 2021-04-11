@@ -28,8 +28,18 @@ input[type="password"] {
 }
 
 a {
-	color: #FA5C5C;
-	font-weight: 700;
+	color: #FF2449;
+	font-weight: bold;
+	transition: background-color 0.1s ease-out;
+}
+
+a:not(:disabled):hover,
+a:not(:disabled):focus {
+	color: #fa5c5c;
+}
+
+a:not(:disabled):active {
+	color: #E1193B;
 }
 
 body {
@@ -57,7 +67,7 @@ button {
 
 button:not(:disabled):hover,
 button:not(:disabled):focus {
-	background-color: #FF2E51;
+	background-color: #fa5c5c;
 }
 
 button:not(:disabled):active {
