@@ -331,4 +331,4 @@ window.App = class App {
 		console.error(message);
 		alert(message.message);
 	}
-}
+};

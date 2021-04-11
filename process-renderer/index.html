@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,13 +16,16 @@
 	<script type="text/javascript" src="./App.js"></script>
 	<script type="text/javascript" src="./index.js"></script>
 </head>
-<body>	
+
+<body>
 	<pre id="output"></pre>
 
 	<div id="main">
 		<section id="login">
-			<div class="input-block"><label for="key">Web API Key:</label><input type="password" name="key" id="key" value=""/></div>
-			<div class="input-block"><label for="rememberMe">Remember me:</label><input type="checkbox" name="rememberMe" id="rememberMe"/></div>
+			<div class="input-block"><label for="key">Web API Key:</label><input type="password" name="key" id="key"
+					value="" /></div>
+			<div class="input-block"><label for="rememberMe">Remember me:</label><input type="checkbox"
+					name="rememberMe" id="rememberMe" /></div>
 			<div class="input-block"><label></label><button id="btnLogin">Submit Key</button></div>
 			<div class="input-block"><label></label><a href="https://itch.io/api-keys">I don't have a web API key</a>
 			</div>
@@ -39,7 +43,8 @@
 		</section>
 
 		<section id="selectProject">
-			<div class="input-block"><label for="projectSelect">Project</label><select name="projectSelect" id="projectSelect"></select></div>
+			<div class="input-block"><label for="projectSelect">Project</label><select name="projectSelect"
+					id="projectSelect"></select></div>
 
 			<div id="projectPreview">
 				<img id="projectCover" src="" width="64px" height="50px" alt="project cover">
@@ -51,23 +56,33 @@
 		</section>
 
 		<section id="selectBuild">
-			<div class="input-block"><label>Select .zip:</label><span id="selectedFile">no .zip selected&hellip;</span></div>
+			<div class="input-block"><label>Select .zip:</label><span id="selectedFile">no .zip selected&hellip;</span>
+			</div>
 
-			<div class="input-block"><label for="channelWin">Windows:</label><input type="checkbox" name="channelWin" id="channelWin"/></div>
-			<div class="input-block"><label for="channelOsx">OSX:</label><input type="checkbox" name="channelOsx" id="channelOsx"/></div>
-			<div class="input-block"><label for="channelLinux">Linux:</label><input type="checkbox" name="channelLinux" id="channelLinux"/></div>
-			<div class="input-block"><label for="channelOther">Other:</label><input type="text" name="channelOther" id="channelOther" value="" placeholder="more-dash-separated-channels"/></div>
+			<div class="input-block"><label for="channelWin">Windows:</label><input type="checkbox" name="channelWin"
+					id="channelWin" /></div>
+			<div class="input-block"><label for="channelOsx">OSX:</label><input type="checkbox" name="channelOsx"
+					id="channelOsx" /></div>
+			<div class="input-block"><label for="channelLinux">Linux:</label><input type="checkbox" name="channelLinux"
+					id="channelLinux" /></div>
+			<div class="input-block"><label for="channelOther">Other:</label><input type="text" name="channelOther"
+					id="channelOther" value="" placeholder="more-dash-separated-channels" /></div>
 		</section>
 
 		<section id="pushBuild">
-			<div class="input-block"><label for="targetPreview">Target:</label><input type="text" name="targetPreview" id="targetPreview" value="" readonly/></div>
+			<div class="input-block"><label for="targetPreview">Target:</label><input type="text" name="targetPreview"
+					id="targetPreview" value="" readonly /></div>
 
-			<div class="input-block"><label></label><button id="btnPush" disabled>Push Build</button> <button id="btnCheckStatus" disabled>Check Build Status</button></div>
+			<div class="input-block"><label></label><button id="btnPush" disabled>Push Build</button> <button
+					id="btnCheckStatus" disabled>Check Build Status</button></div>
 		</section>
 		<section id="progress">
-			<div class="input-block"><label for="eta">ETA:</label><input type="text" name="eta" id="eta" value="" readonly/></div>
-			<div id="progressBar"><div></div></div>
-		</div>
+			<div class="input-block"><label for="eta">ETA:</label><input type="text" name="eta" id="eta" value=""
+					readonly /></div>
+			<div id="progressBar">
+				<div></div>
+			</div>
+	</div>
 	</div>
 
 	<footer>
@@ -78,4 +93,5 @@
 		<sub>using butler: <span id="version">???</span></sub>
 	</footer>
 </body>
+
 </html>

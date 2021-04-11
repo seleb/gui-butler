@@ -29,7 +29,7 @@ function parseMessages(string) {
 ipcMain.handle('butler', async (event, ...args) => {
 	args.push('--json');
 	const butler = new Butler();
-	butler.addListener('data', async (data) => {
+	butler.addListener('data', async data => {
 		const messages = parseMessages(data);
 		await messages.reduce(async (_, message) => {
 			switch (message.type) {

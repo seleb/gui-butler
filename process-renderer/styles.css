@@ -1,81 +1,86 @@
 /* interactivity */
-*{
-	-webkit-user-select:none;
-	cursor:default;
+* {
+	-webkit-user-select: none;
+	cursor: default;
 }
 
-a,button,select,input{
-	cursor:pointer;
+a,
+button,
+select,
+input {
+	cursor: pointer;
 }
 
 input[type="text"],
-input[type="password"]{
-	cursor:text;
+input[type="password"] {
+	cursor: text;
 }
 
 
 /* style */
 
-*{
-	font-family:Century Gothic, sans-serif;
+* {
+	font-family: Century Gothic, sans-serif;
 }
 
 
-#projectCover{
-	vertical-align:middle;
+#projectCover {
+	vertical-align: middle;
 }
 
-#projectText{
-	font-size:.9em;
-	font-style:italic;
+#projectText {
+	font-size: .9em;
+	font-style: italic;
 }
 
-#projectTitle{
-	font-size:1.1em;
+#projectTitle {
+	font-size: 1.1em;
 }
 
-#projectCover{
-	border:1px solid #d0d0d0;
+#projectCover {
+	border: 1px solid #d0d0d0;
 	background: #FFF;
 }
-#projectPreview{
-	box-sizing:border-box;
-	background:#f4f4f4;
+
+#projectPreview {
+	box-sizing: border-box;
+	background: #f4f4f4;
 	border-radius: 3px;
-	margin:1em;
-	padding:1em;
+	margin: 1em;
+	padding: 1em;
 	text-align: center;
-	border:1px solid #d0d0d0;
-	box-shadow:2px 2px 4px rgba(0,0,0,0.1);
+	border: 1px solid #d0d0d0;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
-#projectPreviewText{
-	display:inline-block;
+
+#projectPreviewText {
+	display: inline-block;
 	vertical-align: middle;
 	text-align: left;
-	margin-left:1em;
+	margin-left: 1em;
 }
 
-#targetPreview{
-	cursor:not-allowed;
-	background:#f4f4f4;
+#targetPreview {
+	cursor: not-allowed;
+	background: #f4f4f4;
 }
 
-a{
-	color:#FA5C5C;
-	font-weight:700;
+a {
+	color: #FA5C5C;
+	font-weight: 700;
 }
 
-body{
-	box-sizing:border-box;
-	height:100%;
-	margin:0;
-	padding:0;
-	position:relative;
-	width:100%;
+body {
+	box-sizing: border-box;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
 }
 
-button{
-	position:relative;
+button {
+	position: relative;
 	padding: 5px;
 	border: 1px solid #e15353;
 	-webkit-border-radius: 4px;
@@ -86,178 +91,186 @@ button{
 	background-color: #fa5c5c;
 	vertical-align: middle;
 }
-button:active{
-	top:1px;
+
+button:active {
+	top: 1px;
 }
-button:disabled{
+
+button:disabled {
 	color: #FFF;
 	background-color: #d0d0d0;
-	border-color:#d0d0d0;
+	border-color: #d0d0d0;
 	cursor: not-allowed;
 }
 
-div#main{
-	overflow:auto;
-
-	position:absolute;
-	top:0;
-	bottom:3rem;
-	left:0;
-	right:40%;
-}
-
-#output{
-	display:block;
-	background:#666;
-	box-sizing:border-box;
-	color:#FFF;
-	font-family:monospace;
-	margin:0;
-	overflow:auto;
-	padding:5px;
+div#main {
+	overflow: auto;
 
 	position: absolute;
-	top:0;
-	bottom:3rem;
-	left:60%;
-	right:0;
+	top: 0;
+	bottom: 3rem;
+	left: 0;
+	right: 40%;
 }
 
-footer{
+#output {
+	display: block;
+	background: #666;
+	box-sizing: border-box;
+	color: #FFF;
+	font-family: monospace;
+	margin: 0;
+	overflow: auto;
+	padding: 5px;
+
+	position: absolute;
+	top: 0;
+	bottom: 3rem;
+	left: 60%;
+	right: 0;
+}
+
+footer {
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
-	bottom:0;
-	height:3rem;
-	text-align:center;
+	bottom: 0;
+	height: 3rem;
+	text-align: center;
 }
 
-footer sub{
-	display:block;
-	width:100%;
+footer sub {
+	display: block;
+	width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	margin-top:2px;
+	margin-top: 2px;
 }
 
-footer{
-	background:#F4F4F4;
-	border:1px solid #dadada;
-	color:#666;
-	left:0;
-	position:fixed;
-	right:0;
+footer {
+	background: #F4F4F4;
+	border: 1px solid #dadada;
+	color: #666;
+	left: 0;
+	position: fixed;
+	right: 0;
 }
 
-html{
-	box-sizing:border-box;
-	color:#222;
-	font-size:0.8em;
-	height:100%;
-	margin:0;
-	width:100%;
+html {
+	box-sizing: border-box;
+	color: #222;
+	font-size: 0.8em;
+	height: 100%;
+	margin: 0;
+	width: 100%;
 }
 
-input,select,#selectedFile{
-	font-size:1em;
-	-webkit-user-select:default;
-	display:inline-block;
-	max-width:50%;
-	width:35em;
+input,
+select,
+#selectedFile {
+	font-size: 1em;
+	-webkit-user-select: default;
+	display: inline-block;
+	max-width: 50%;
+	width: 35em;
 	vertical-align: middle;
-	padding:2px;
+	padding: 2px;
 	text-align: left;
-	border:solid 1px #dadada;
+	border: solid 1px #dadada;
 	border-radius: 3px;
-	margin-top:2px;
-	margin-bottom:2px;
+	margin-top: 2px;
+	margin-bottom: 2px;
 }
-input[type="checkbox"]{
-	width:initial;
+
+input[type="checkbox"] {
+	width: initial;
 }
+
 input:focus,
 button:focus,
-select:focus{
+select:focus {
 	outline-color: #fa5c5c;
 
 }
+
 input:focus:active,
 button:focus:active,
-select:focus:active{
+select:focus:active {
 	outline: none;
 }
 
-.input-block{
-	display:block;
+.input-block {
+	display: block;
 	white-space: nowrap;
 	max-width: 100%;
 }
 
-label{
-	display:inline-block;
-	width:10em;
+label {
+	display: inline-block;
+	width: 10em;
 	text-align: right;
 	margin-right: 1em;
 }
 
-#selectedFile{
-	display:inline-block;
+#selectedFile {
+	display: inline-block;
 	text-overflow: ellipsis;
-	overflow:hidden;
+	overflow: hidden;
 	white-space: nowrap;
-	cursor:pointer;
+	cursor: pointer;
 }
 
-section{
-	border-bottom:1px solid #dadada;
-	padding:1em;
-	display:none;
+section {
+	border-bottom: 1px solid #dadada;
+	padding: 1em;
+	display: none;
 }
 
-#progressBar{
-	position:relative;
-	width:100%;
-	height:2em;
+#progressBar {
+	position: relative;
+	width: 100%;
+	height: 2em;
 	background: #666;
-	border:1px solid #dadada;
-	box-shadow:2px 2px 4px rgba(0,0,0,0.1);
+	border: 1px solid #dadada;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#progressBar div{
-	position:relative;
-	width:0%;
+#progressBar div {
+	position: relative;
+	width: 0%;
 	background: #FA5C5C;
 	height: 100%;
 
 	-webkit-transition: width 0.1s;
 }
-#progressBar:before{
+
+#progressBar:before {
 	content: " ";
-    display: none;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: linear-gradient(
-		90deg,
-    	transparent 0%,
-    	#dadada 50%,
-    	transparent 100%
-    );
-    background-size:20% 100%;
-    background-repeat: no-repeat no-repeat;
+	display: none;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: linear-gradient(90deg,
+			transparent 0%,
+			#dadada 50%,
+			transparent 100%);
+	background-size: 20% 100%;
+	background-repeat: no-repeat no-repeat;
 }
-#progressBar.active:before{
-    display: block;
+
+#progressBar.active:before {
+	display: block;
 	animation: move 2s cubic-bezier(0.55, 0.06, 0.68, 0.19) infinite;
 }
 
 @keyframes move {
-  0% {
-    background-position: -40% 0;
-  }
-  100% {
-    background-position: 120% 0;
-  }
+	0% {
+		background-position: -40% 0;
+	}
+
+	100% {
+		background-position: 120% 0;
+	}
 }
