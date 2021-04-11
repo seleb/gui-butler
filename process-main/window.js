@@ -1,4 +1,4 @@
-const { BrowserWindow, app } = require('electron');
+const { BrowserWindow, app, shell } = require('electron');
 
 let win;
 function createWindow() {
@@ -22,6 +22,12 @@ function createWindow() {
 		win.show();
 	});
 	win.loadURL(`file://${__dirname}/../process-renderer/index.html`);
+
+	// open links externally by default
+	win.webContents.on('new-window', function (e, url) {
+		e.preventDefault();
+		shell.openExternal(url);
+	});
 
 	if (!app.isPackaged) {
 		win.toggleDevTools();

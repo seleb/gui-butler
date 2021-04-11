@@ -6,14 +6,6 @@ $(document).ready(async function(){
 	app = new App();
 
 
-    // open links externally by default
-    // since we're using a single-page frameless app, opening them in electron would be pretty weird
-	shell = require("electron").shell;
-    $(document).on("click", "a[href^=\"http\"]", function(event) {
-        event.preventDefault();
-        shell.openExternal(this.href);
-    });
-
 
 	////////////////
 	// MAIN STUFF //
