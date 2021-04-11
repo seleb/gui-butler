@@ -3,13 +3,6 @@
 	-webkit-user-select:none;
 	cursor:default;
 }
-header{
-	-webkit-app-region:drag;
-}
-
-header nav button{
-	-webkit-app-region:no-drag;
-}
 
 a,button,select,input{
 	cursor:pointer;
@@ -73,11 +66,6 @@ a{
 }
 
 body{
-	background:#FFF;
-	border:1px solid #d0d0d0;
-	border-radius:3px;
-	border-top:0;
-	box-shadow:2px 2px 4px rgba(0,0,0,0.2);
 	box-sizing:border-box;
 	height:100%;
 	margin:0;
@@ -112,7 +100,7 @@ div#main{
 	overflow:auto;
 
 	position:absolute;
-	top:3rem;
+	top:0;
 	bottom:3rem;
 	left:0;
 	right:40%;
@@ -129,7 +117,7 @@ div#main{
 	padding:5px;
 
 	position: absolute;
-	top:3rem;
+	top:0;
 	bottom:3rem;
 	left:60%;
 	right:0;
@@ -152,95 +140,21 @@ footer sub{
 	margin-top:2px;
 }
 
-header{
-	border-top-right-radius: 3px;
-	border-top-left-radius: 3px;
-	box-sizing:border-box;
-	height:3rem;
-	padding-left:1em;
-	top:0;
-}
-
-header h1{
-	display:inline-block;
-	font-size:1.2em;
-	margin:0;
-	padding:0;
-}
-
-header h1 span{
-	background:url("favicon.png");
-	background-size:100% 100%;
-	display:inline-block;
-	height:3rem;
-	vertical-align:middle;
-	width:3rem;
-
-	-webkit-transition: transform 1.0s cubic-bezier(.43,.99,.08,1.09);
-	-webkit-app-region: no-drag;
-	transform:rotate(0deg) scale(0.66);
-}
-header h1 span:active{
-	transform:rotate(-360deg) scale(1);
-	cursor:none;
-}
-
-header nav{
-	display:inline-block;
-	position:absolute;
-	top:4px;
-	right:4px;
-}
-
-header nav button{
-	position:relative;
-	font-size:0;
-
-	height:1rem;
-	width:1rem;
-
-	display:inline-block;
-	vertical-align: middle;
-
-	border:0;
-	background: transparent;
-	background-size: 100% 100%;
-}
-header nav button:hover{
-	background-color: rgba(255,255,255,0.5);
-}
-#btnMinimize{
-	background-image: url("nav_icons_minimize.svg");
-}
-#btnMaximize{
-	background-image: url("nav_icons_maximize.svg");
-}
-#btnExit{
-	background-image: url("nav_icons_exit.svg");
-}
-#btnExit:hover{
-	background-color: rgba(255,128,128,0.5);
-}
-
-header,
 footer{
 	background:#F4F4F4;
 	border:1px solid #dadada;
 	color:#666;
 	left:0;
-	margin:4px;
 	position:fixed;
 	right:0;
 }
 
 html{
-	background:rgba(0,0,0,0.01);
 	box-sizing:border-box;
 	color:#222;
 	font-size:0.8em;
 	height:100%;
 	margin:0;
-	padding:4px;
 	width:100%;
 }
 

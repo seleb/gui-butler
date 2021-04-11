@@ -4,15 +4,11 @@ function createWindow() {
 		useContentSize: true,
 		icon:"favicon.ico",
 		title:"gui-butler",
-		titleBarStyle: "hidden",
+		titleBarStyle: "hiddenInset",
 		autoHideMenuBar: true,
-		frame:false,
-		transparent:true,
-		backgroundColor:"#00FFFFFF",
+		backgroundColor:"#FFFFFF",
 		minHeight:300,
 		minWidth:400,
-		resizable:true,
-		maximizable:true,
 		show:false
 	});
 	win.once('ready-to-show', function(){
