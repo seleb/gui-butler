@@ -1,15 +1,8 @@
 // jquery!
 window.$ = window.jQuery = require("jquery");
 
-
-
-$(document).ready(function(){
-
-	// get some of the stuff we need for later
-	// TODO: remove use of remote
-	remote = require("@electron/remote");
-	child_process = require("child_process");
-
+$(document).ready(async function(){
+	const { App } = require('./App');
 	app = new App();
 
 
@@ -66,4 +59,6 @@ $(document).ready(function(){
 	 	app.butler_status(app.getProjectUrl());
 	});
 
+	await app.butler_init();
+	app.tryLogin();
 });

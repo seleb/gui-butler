@@ -1,3 +1,9 @@
+const { ipcRenderer } = require('electron');
+
+function ipcInvoke(...args) {
+	return ipcRenderer.invoke(...args);
+}
+
 class App {
 	constructor() {
 		this.users = null;
@@ -7,15 +13,29 @@ class App {
 		this.selectedProjectIdx = null;
 		this.selectedProject = null;
 		this.selectedFile = null;
-		this.butler = new Butler();
 
-		this.butler_upgrade();
+		ipcRenderer.on('butler:log', (event, ...args) => {
+			this.onButlerLog(...args);
+		});
+		ipcRenderer.on('butler:progress', (event, ...args) => {
+			this.onButlerProgress(...args);
+		});
+		ipcRenderer.on('butler:error', (event, ...args) => {
+			this.onButlerError(...args);
+		});
+	}
+	tryLogin() {
+		// TODO: replace with oauth
+		// get login details
+		$('#key').val(window.localStorage.getItem('key'));
+		if ((window.localStorage.getItem('rememberMe') || '0') == '1') {
+			$('#rememberMe').prop('checked', true);
 
-		this.butler.onClose = function () {
-			this.butler_version();
-			this.butler_login();
-			this.butler.onClose = null;
-		}.bind(this);
+			// auto-login
+			$('#login button').trigger('click');
+		} else {
+			$('section#login').slideDown();
+		}
 	}
 	login(key, user, rememberMe) {
 		$('#btnLogin').prop('disabled', true);
@@ -182,7 +202,7 @@ class App {
 	}
 	async selectFile() {
 		// prompt user to select a .zip archive
-		const { canceled, filePaths } = await remote.dialog.showOpenDialog({
+		const { canceled, filePaths } = await ipcInvoke('open-dialog', {
 			title: 'Select build archive',
 			filters: [{ name: 'Build Archive', extensions: ['zip'] }],
 			properties: ['openFile'],
@@ -274,66 +294,37 @@ class App {
 		}
 	}
 	// calling butler
-	butler_push(file, url) {
-		this.butler.call(['push', file, url], true, this.onMessage.bind(this), this.onMessage.bind(this));
+	async butler_init() {
+		await ipcInvoke('butler', 'upgrade');
+		const version = await ipcInvoke('butler', 'version');
+		$('#version').html(version.value.version);
+		await ipcInvoke('butler', 'login');
 	}
-	butler_status(url) {
-		this.butler.call(['status', url], false, this.onMessage.bind(this), this.onMessage.bind(this));
+	async butler_push(file, url) {
+		await ipcInvoke('butler', 'push', file, url);
 	}
-	butler_login(json) {
-		this.butler.call(['login'], true, this.onMessage.bind(this), this.onMessage.bind(this));
-	}
-	butler_logout(json) {
-		// TODO: should probably replace the --assume-yes with something to handle the prompt message and let user decide
-		// no message types associated with logout, so we call it synchronously
-		this.butler.call(['logout', '--assume-yes'], false, this.onMessage.bind(this), this.onMessage.bind(this));
-	}
-	butler_version() {
-		this.butler.call(['-V'], false, null, function (stderr) {
-			$('#version').html(stderr.toString());
-		});
-	}
-	butler_upgrade() {
-		this.butler.call(['upgrade'], true, this.onMessage.bind(this), this.onMessage.bind(this));
+	async butler_status(url) {
+		await ipcInvoke('butler', 'status', url);
 	}
 	// receiving messages from butler
 	async onMessage(data) {
-		//console.log(data.toString());
-		var messages = data.toString().split('}\n');
-
-		for (var i = 0; i < messages.length; ++i) {
-			var json = messages[i];
-			if (json == '') {
-				continue;
-			}
-			try {
-				json = JSON.parse(json + '}');
-			} catch (e) {
-				json = {
-					type: 'log',
-					message: json,
-					level: 'info',
-				};
-				console.error('JSON parse failed; assuming response was an info log\n', e);
-			}
-			await this['json_' + json.type](json);
-		}
+		await this['json_' + data.type](data);
 	}
-	json_log(json) {
+	onButlerLog(message) {
 		// general purpose logging
 		// TODO: provide a way to show debug logs in addition to info
-		if (json.level == 'info') {
-			$('#output').append(json.message + '\n');
+		if (message.level == 'info') {
+			$('#output').append(message.message + '\n');
 			$('#output').scrollTop($('#output')[0].scrollHeight);
 		}
 	}
-	json_progress(json) {
+	onButlerProgress(message) {
 		// update on upload progress
 		// TODO: format ETA
-		$('#progressBar div').width(json.percentage + '%');
-		$('#eta').val(json.eta);
+		$('#progressBar div').width(message.percentage + '%');
+		$('#eta').val(message.eta);
 
-		if (json.progress == 1) {
+		if (message.progress == 1) {
 			// complete
 			$('#progressBar').removeClass('active');
 			$('#progress').slideUp();
@@ -342,43 +333,12 @@ class App {
 			$('#progress').slideDown();
 		}
 	}
-	json_login(json) {
-		// attempting to login
-		shell.openExternal(json.uri);
-	}
-	json_result(json) {
-		// finished logging in
-		if (json.value.status == 'success') {
-			// get login details
-			$('#key').val(window.localStorage.getItem('key'));
-			if ((window.localStorage.getItem('rememberMe') || '0') == '1') {
-				$('#rememberMe').prop('checked', true);
-
-				// auto-login
-				$('#login button').trigger('click');
-			} else {
-				$('section#login').slideDown();
-			}
-		} else {
-			// TODO: idk; haven't actually tested the fail case yet
-			alert(json);
-		}
-	}
-	json_error(json) {
-		alert(json.message);
-	}
-	async json_yesno(json) {
-		const { response } = await remote.dialog.showMessageBox(win, {
-			type: 'question',
-			buttons: ['Yes', 'No'],
-			title: 'butler has a question:',
-			message: json.question,
-		});
-
-		if (response === 0) {
-			this.butler.yes();
-		} else {
-			this.butler.no();
-		}
+	onButlerError(message) {
+		console.error(message);
+		alert(message.message);
 	}
 }
+
+module.exports = {
+	App,
+};

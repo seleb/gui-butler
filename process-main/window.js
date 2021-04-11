@@ -1,5 +1,6 @@
 const { BrowserWindow, app } = require('electron');
 
+let win;
 function createWindow() {
 	win = new BrowserWindow({
 		useContentSize: true,
@@ -29,4 +30,5 @@ function createWindow() {
 
 module.exports = {
 	createWindow,
+	win,
 };
