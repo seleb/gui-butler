@@ -1,3 +1,5 @@
+const formatSeconds = new Intl.NumberFormat(undefined, { style: 'unit', unit: 'second', unitDisplay: 'long' }).format;
+
 window.App = class App {
 	constructor() {
 		this.users = null;
@@ -317,8 +319,7 @@ window.App = class App {
 	onButlerProgress(message) {
 		// update on upload progress
 		$('progress').val(message.progress);
-		// TODO: format ETA
-		$('#eta').val(message.eta);
+		$('#eta').val(formatSeconds(message.eta));
 	}
 	onButlerError(message) {
 		console.error(message);
