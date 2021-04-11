@@ -3,6 +3,7 @@
 	/* interactivity */
 	user-select: none;
 	cursor: default;
+	outline-color: #fa5c5c;
 }
 
 a,
@@ -130,19 +131,6 @@ select {
 
 input[type="checkbox"] {
 	width: initial;
-}
-
-input:focus,
-button:focus,
-select:focus {
-	outline-color: #fa5c5c;
-
-}
-
-input:focus:active,
-button:focus:active,
-select:focus:active {
-	outline: none;
 }
 
 fieldset {
