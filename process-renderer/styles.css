@@ -26,47 +26,6 @@ input[type="password"] {
 	font-family: Century Gothic, sans-serif;
 }
 
-
-#projectCover {
-	vertical-align: middle;
-}
-
-#projectText {
-	font-size: .9em;
-	font-style: italic;
-}
-
-#projectTitle {
-	font-size: 1.1em;
-}
-
-#projectCover {
-	border: 1px solid #d0d0d0;
-	background: #FFF;
-}
-
-#projectPreview {
-	background: #f4f4f4;
-	border-radius: 3px;
-	margin: 1em;
-	padding: 1em;
-	text-align: center;
-	border: 1px solid #d0d0d0;
-	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#projectPreviewText {
-	display: inline-block;
-	vertical-align: middle;
-	text-align: left;
-	margin-left: 1em;
-}
-
-#targetPreview {
-	cursor: not-allowed;
-	background: #f4f4f4;
-}
-
 a {
 	color: #FA5C5C;
 	font-weight: 700;
@@ -219,4 +178,35 @@ fieldset a.fill {
 
 progress {
 	width: 100%;
+}
+
+/* project preview */
+figure {
+	background: #f4f4f4;
+	border-radius: 3px;
+	margin: 1em;
+	padding: 1em;
+	border: 1px solid #d0d0d0;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+figure img {
+	flex: none;
+	border: 1px solid #d0d0d0;
+	background: #FFF;
+}
+
+figure figcaption {
+	flex: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+#targetPreview {
+	cursor: not-allowed;
+	background: #f4f4f4;
 }

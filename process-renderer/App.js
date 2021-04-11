@@ -183,7 +183,6 @@ window.App = class App {
 		$('#projectCover').attr('src', this.selectedProject.cover_url);
 
 		// update text
-		$('#projectTitle').text(this.selectedProject.title);
 		$('#projectText').text(this.selectedProject.short_text);
 
 		// update link
