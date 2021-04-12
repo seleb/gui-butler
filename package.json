@@ -15,7 +15,6 @@
     "electron-packager": "^15.2.0"
   },
   "dependencies": {
-    "dialog": "^0.3.1",
     "jquery": "^3.4.0"
   }
 }
