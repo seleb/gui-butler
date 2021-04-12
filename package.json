@@ -3,13 +3,15 @@
   "productName": "gui-butler",
   "version": "0.0.1",
   "description": "A GUI wrapper for itch.io's butler CLI",
+  "license": "MIT",
+  "author": "Sean S. LeBlanc <sean.s.leblanc@gmail.com>",
+  "repository": "github:seleb/gui-butler",
   "main": "process-main/main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . --appname=gui-butler --icon=favicon.ico --out=bin --platform=win32 --arch=x64 --prune --overwrite",
     "update-butler": "sh update-butler.sh"
   },
-  "author": "Sean S. LeBlanc",
   "devDependencies": {
     "electron": "^12.0.2",
     "electron-packager": "^15.2.0"
