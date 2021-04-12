@@ -27,7 +27,11 @@ module.exports = {
 			const nonce = crypto.randomBytes(16).toString('hex');
 			app.once('second-instance', (_event, args) => {
 				showWindow();
-				const params = new URLSearchParams(args[3].split('#').pop());
+				const authCmd = args.find(arg => arg.startsWith(redirectUri));
+				if (!authCmd) {
+					reject(new Error('oauth failed: could not find custom protocol in second-instance'));
+				}
+				const params = new URLSearchParams(authCmd.split('#').pop());
 				if (params.get('state') === nonce) {
 					const token = params.get('access_token');
 					resolve(token);
