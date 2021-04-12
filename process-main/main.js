@@ -5,7 +5,7 @@ require('./ipc');
 const { createWindow } = require('./window');
 const primaryInstance = app.requestSingleInstanceLock();
 if (!primaryInstance) {
-	app.requestSingleInstanceLock();
+	app.quit();
 	return;
 }
 
