@@ -273,6 +273,7 @@ window.App = class App {
 	}
 	async butler_push(file, url) {
 		$('#progress').show();
+		$('#progress')[0].scrollIntoView();
 		await api.invoke('butler', 'push', file, url);
 		$('#progress').hide();
 	}
