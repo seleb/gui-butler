@@ -17,21 +17,16 @@
 <body>
 	<main>
 		<fieldset id="login">
-			<legend>Login</legend>
+			<legend>Authorization</legend>
 
-			<label for="key">Web API Key:</label>
-			<input type="password" name="key" id="key" value="" />
+			<button class="fill" id="btnLogin">Login</button>
 
-			<label for="rememberMe">Remember me:</label>
-			<input type="checkbox" name="rememberMe" id="rememberMe" />
-
-			<button class="fill" id="btnLogin">Submit Key</button>
-			<a class="fill" href="https://itch.io/api-keys">I don't have a web API key</a>
+			<p class="fill">Note that gui-butler requires two forms of authorization: one for butler (to manage builds), and one for gui-butler (to list projects)</p>
 		</fieldset>
 
 		<fieldset id="logout">
-			<legend>Logout</legend>
-			<button class="fill" id="btnLogout">Change API Key</button>
+			<legend>Authorization</legend>
+			<button class="fill" id="btnLogout">Logout</button>
 		</fieldset>
 
 		<fieldset id="selectUser">

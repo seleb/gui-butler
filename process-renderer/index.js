@@ -1,5 +1,6 @@
 $(document).ready(async function () {
 	$('fieldset').hide();
+	$('#login').show();
 
 	app = new window.App();
 
@@ -11,7 +12,7 @@ $(document).ready(async function () {
 	});
 
 	$('#btnLogin').on('click', function (event) {
-		app.login($('#key').val(), $('#user').val(), $('#rememberMe')[0].checked);
+		app.login();
 	});
 
 	$('#btnLogout').on('click', function (event) {

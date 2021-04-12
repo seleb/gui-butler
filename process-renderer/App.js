@@ -21,23 +21,17 @@ window.App = class App {
 		});
 	}
 	tryLogin() {
-		// TODO: replace with oauth
-		// get login details
-		$('#key').val(window.localStorage.getItem('key'));
-		if ((window.localStorage.getItem('rememberMe') || '0') == '1') {
-			$('#rememberMe').prop('checked', true);
-
-			// auto-login
-			$('#login button').trigger('click');
-		} else {
-			$('#login').show();
-		}
+		// auto-login
+		$('#login button').trigger('click');
 	}
-	login(key, user, rememberMe) {
+	async login() {
 		$('#btnLogin').prop('disabled', true);
+		await api.invoke('butler', 'login');
+		const auth = await api.invoke('oauth:login');
+
 
 		$.ajax({
-			url: 'https://itch.io/api/1/' + key + '/my-games',
+			url: 'https://itch.io/api/1/' + auth + '/my-games',
 		})
 			.done(
 				function (data) {
@@ -52,22 +46,9 @@ window.App = class App {
 					if (!data.games.hasOwnProperty('length') || data.games.length <= 0) {
 						// the user has nothing associated with their key
 						this.failLogin(
-							"Error: couldn't find any projects associated with this key. gui-butler only pushes builds to existing projects; you need to use itch.io or the official app to actually create them."
+							"Error: couldn't find any projects associated with this account. gui-butler only pushes builds to existing projects; you need to use itch.io or the official app to actually create them."
 						);
 						return;
-					}
-
-					// success!
-					if (rememberMe) {
-						// save login details to local storage
-						window.localStorage.setItem('key', key);
-						window.localStorage.setItem('rememberMe', '1');
-					} else {
-						// clear login details from local storage
-						window.localStorage.setItem('key', '');
-						window.localStorage.setItem('rememberMe', '0');
-						window.localStorage.setItem('userIdx', '0');
-						window.localStorage.setItem('projectIdx', '0');
 					}
 
 					// find all usernames associated with key by stripping URLs
@@ -287,7 +268,6 @@ window.App = class App {
 		await api.invoke('butler', 'upgrade');
 		const version = await api.invoke('butler', 'version');
 		$('#version').html(version.value.version);
-		await api.invoke('butler', 'login');
 	}
 	async butler_push(file, url) {
 		$('#progress').show();

@@ -1,6 +1,7 @@
 const { ipcMain, dialog, shell } = require('electron');
 const Butler = require('./butler');
 const { win } = require('./window');
+const oauth = require('./oauth');
 
 async function yesno(json) {
 	const { response } = await dialog.showMessageBox(win, {
@@ -59,4 +60,15 @@ ipcMain.handle('butler', async (event, ...args) => {
 	const data = await butler.invoke(...args);
 	butler.removeAllListeners();
 	return parseMessages(data.toString()).pop();
+});
+
+
+ipcMain.handle('oauth:login', async (event) => {
+	try {
+		const auth = await oauth();
+		return auth;
+	} catch (err) {
+		console.error(auth);
+		event.sender.send('butler:error', err);
+	}
 });
