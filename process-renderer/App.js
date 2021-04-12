@@ -288,13 +288,23 @@ window.App = class App {
 		document.querySelector('#version').textContent = version.value.version;
 	}
 	async butler_push(file, url) {
+		document.querySelector('#btnPush').disabled = true;
 		show(document.querySelector('#progress'));
 		document.querySelector('#progress').scrollIntoView();
-		await api.invoke('butler', 'push', file, url);
-		hide(document.querySelector('#progress'));
+		try {
+			await api.invoke('butler', 'push', file, url);
+		} finally {
+			hide(document.querySelector('#progress'));
+			document.querySelector('#btnPush').disabled = false;
+		}
 	}
 	async butler_status(url) {
-		await api.invoke('butler', 'status', url);
+		document.querySelector('#btnCheckStatus').disabled = true;
+		try {
+			await api.invoke('butler', 'status', url);
+		} finally {
+			document.querySelector('#btnCheckStatus').disabled = false;
+		}
 	}
 	onButlerLog(message) {
 		// general purpose logging
