@@ -34,5 +34,7 @@ function createWindow() {
 
 module.exports = {
 	createWindow,
-	win,
+	getWindow() {
+		return win;
+	},
 };

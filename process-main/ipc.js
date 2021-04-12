@@ -1,10 +1,10 @@
 const { ipcMain, dialog, shell } = require('electron');
 const Butler = require('./butler');
-const { win } = require('./window');
 const oauth = require('./oauth');
+const { getWindow } = require('./window');
 
 async function yesno(json) {
-	const { response } = await dialog.showMessageBox(win, {
+	const { response } = await dialog.showMessageBox(getWindow(), {
 		type: 'question',
 		buttons: ['Yes', 'No'],
 		title: 'butler has a question:',
