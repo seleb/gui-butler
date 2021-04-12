@@ -6,6 +6,10 @@
 	outline-color: var(--accent-3);
 }
 
+[aria-visible="false"] {
+	display: none!important;
+}
+
 a,
 button,
 select,
