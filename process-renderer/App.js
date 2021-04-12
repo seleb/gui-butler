@@ -127,7 +127,10 @@ window.App = class App {
 		$('#btnLogin').prop('disabled', false);
 		$('#login').show();
 	}
-	logout() {
+	async logout() {
+		$('#btnLogout').prop('disabled', true);
+		await api.invoke('butler', 'logout');
+		$('#btnLogout').prop('disabled', false);
 		$('#login').show();
 
 		$('#btnLogin').prop('disabled', false);
