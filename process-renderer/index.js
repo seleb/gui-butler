@@ -1,4 +1,4 @@
-$(document).ready(async function () {
+document.addEventListener('DOMContentLoaded', async () => {
 	$('fieldset').hide();
 	$('#login').show();
 
@@ -42,4 +42,4 @@ $(document).ready(async function () {
 
 	await app.butler_init();
 	app.tryLogin();
-});
+})
