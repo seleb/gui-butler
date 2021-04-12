@@ -21,7 +21,11 @@
 
 			<button class="fill" id="btnLogin">Login</button>
 
-			<p class="fill">Note that gui-butler requires two forms of authorization: one for butler (to manage builds), and one for gui-butler (to list projects)</p>
+			<label for="rememberMe">Remember me</label>
+			<input type="checkbox" name="rememberMe" id="rememberMe" />
+
+			<p class="fill">Note that gui-butler requires two forms of authorization: one for butler (to manage builds),
+				and one for gui-butler (to list projects)</p>
 		</fieldset>
 
 		<fieldset id="logout">
@@ -53,7 +57,7 @@
 			<legend>Build</legend>
 
 			<label for="selectedFile">Select .zip:</label>
-			<input type="file" id="selectedFile" accept=".zip"/>
+			<input type="file" id="selectedFile" accept=".zip" />
 
 			<label for="channelWin">Windows:</label>
 			<input type="checkbox" name="channelWin" id="channelWin" />

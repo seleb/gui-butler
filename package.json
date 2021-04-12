@@ -15,6 +15,7 @@
     "electron-packager": "^15.2.0"
   },
   "dependencies": {
+    "electron-store": "^7.0.3",
     "jquery": "^3.4.0"
   }
 }

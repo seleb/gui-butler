@@ -20,15 +20,16 @@ window.App = class App {
 			this.onButlerError(...args);
 		});
 	}
-	tryLogin() {
-		// auto-login
-		$('#login button').trigger('click');
+	async tryLogin() {
+		const token = await api.invoke('oauth:autologin');
+		if (token) {
+			this.login();
+		}
 	}
 	async login() {
 		$('#btnLogin').prop('disabled', true);
 		await api.invoke('butler', 'login');
-		const auth = await api.invoke('oauth:login');
-
+		const auth = await api.invoke('oauth:login', $('#rememberMe').prop('checked'));
 
 		$.ajax({
 			url: 'https://itch.io/api/1/' + auth + '/my-games',
@@ -111,6 +112,7 @@ window.App = class App {
 	async logout() {
 		$('#btnLogout').prop('disabled', true);
 		await api.invoke('butler', 'logout');
+		await api.invoke('oauth:logout');
 		$('#btnLogout').prop('disabled', false);
 		$('#login').show();
 

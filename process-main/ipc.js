@@ -1,7 +1,7 @@
 const { ipcMain, dialog, shell } = require('electron');
 const Butler = require('./butler');
-const oauth = require('./oauth');
 const { getWindow } = require('./window');
+const { forgetToken, getToken, rememberToken } = require('./oauth');
 
 async function yesno(json) {
 	const { response } = await dialog.showMessageBox(getWindow(), {
@@ -62,13 +62,21 @@ ipcMain.handle('butler', async (event, ...args) => {
 	return parseMessages(data.toString()).pop();
 });
 
+ipcMain.handle('oauth:autologin', rememberToken);
 
-ipcMain.handle('oauth:login', async (event) => {
+ipcMain.handle('oauth:login', async (event, rememberMe) => {
 	try {
-		const auth = await oauth();
+		let auth = await rememberToken();
+		if (!auth) {
+			auth = await getToken(rememberMe);
+		}
 		return auth;
 	} catch (err) {
 		console.error(auth);
 		event.sender.send('butler:error', err);
 	}
+});
+
+ipcMain.handle('oauth:logout', async () => {
+	await forgetToken();
 });
