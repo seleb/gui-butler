@@ -3,7 +3,7 @@
 	/* interactivity */
 	user-select: none;
 	cursor: default;
-	outline-color: #fa5c5c;
+	outline-color: var(--accent-3);
 }
 
 a,
@@ -20,26 +20,31 @@ input[type="password"] {
 	cursor: text;
 }
 
+input:read-only {
+	cursor: not-allowed;
+	opacity: 0.8;
+}
+
 
 /* style */
 
 * {
-	font-family: Century Gothic, sans-serif;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
-	color: #FF2449;
+	color: var(--accent-2);
 	font-weight: bold;
 	transition: background-color 0.1s ease-out;
 }
 
 a:not(:disabled):hover,
 a:not(:disabled):focus {
-	color: #fa5c5c;
+	color: var(--accent-3);
 }
 
 a:not(:disabled):active {
-	color: #E1193B;
+	color: var(--accent-1);
 }
 
 body {
@@ -55,9 +60,9 @@ body {
 
 button {
 	position: relative;
-	padding: 0.2rem;
-	color: #FFF;
-	background-color: #FF2449;
+	padding: 0.5rem 0.25rem;
+	color: var(--neutral-9);
+	background-color: var(--accent-2);
 	border-radius: 0.25rem;
 	border: none;
 	font-weight: bold;
@@ -67,11 +72,11 @@ button {
 
 button:not(:disabled):hover,
 button:not(:disabled):focus {
-	background-color: #fa5c5c;
+	background-color: var(--accent-3);
 }
 
 button:not(:disabled):active {
-	background-color: #E1193B;
+	background-color: var(--accent-1);
 	top: 1px;
 }
 
@@ -85,10 +90,10 @@ main {
 }
 
 #output {
-	min-width: 20rem;
+	min-width: 50vw;
 	display: block;
-	background: #666;
-	color: #FFF;
+	color: var(--neutral-9);
+	background: var(--neutral-1);
 	font-family: monospace;
 	margin: 0;
 	overflow: auto;
@@ -103,9 +108,8 @@ footer {
 	padding: 0.25rem;
 	text-align: center;
 	font-size: smaller;
-	background: #F4F4F4;
-	border-top: 1px solid #dadada;
-	color: #666;
+	background: var(--neutral-4);
+	border-top: 1px solid var(--neutral-3);
 }
 
 footer ul {
@@ -122,11 +126,14 @@ footer ul li:not(:last-child)::after {
 }
 
 html {
-	color: #222;
-	font-size: 0.8em;
+	background-color: var(--neutral-9);
+	color: var(--neutral-1);
 	height: 100%;
 	margin: 0;
 	width: 100%;
+	font-size: 0.8em;
+	line-height: 1.5;
+	letter-spacing: 0.05em;
 }
 
 input,
@@ -134,12 +141,22 @@ select {
 	width: 100%;
 	padding: 2px;
 	text-align: left;
-	border: solid 1px #dadada;
+	border: solid 1px var(--neutral-3);
 	border-radius: 3px;
 	margin-top: 2px;
 	margin-bottom: 2px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	background-color: transparent;
+	color: inherit;
+}
+
+option {
+	background-color: var(--neutral-9);
+}
+
+option:hover {
+	background-color: var(--accent-2);
 }
 
 input[type="checkbox"] {
@@ -148,7 +165,7 @@ input[type="checkbox"] {
 
 fieldset {
 	border: none;
-	border-bottom: 1px solid #dadada;
+	border-bottom: 1px solid var(--neutral-3);
 	padding: 1rem 0.5rem;
 	display: grid;
 	grid-template-columns: 8rem 1fr;
@@ -182,11 +199,11 @@ progress {
 
 /* project preview */
 figure {
-	background: #f4f4f4;
+	background: var(--neutral-4);
 	border-radius: 3px;
 	margin: 1em;
 	padding: 1em;
-	border: 1px solid #d0d0d0;
+	border: 1px solid var(--neutral-3);
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 	display: flex;
 	align-items: center;
@@ -195,8 +212,8 @@ figure {
 
 figure img {
 	flex: none;
-	border: 1px solid #d0d0d0;
-	background: #FFF;
+	border: 1px solid var(--neutral-3);
+	background: var(--neutral-9);
 }
 
 figure figcaption {
@@ -204,9 +221,4 @@ figure figcaption {
 	display: flex;
 	flex-direction: column;
 	gap: 0.25rem;
-}
-
-#targetPreview {
-	cursor: not-allowed;
-	background: #f4f4f4;
 }

@@ -1,0 +1,42 @@
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+		--neutral-0: #080808;
+		--neutral-1: #111;
+		--neutral-2: #444;
+	}
+
+	html {
+		background-color: var(--neutral-0);
+		color: var(--neutral-3);
+	}
+
+	fieldset {
+		border-color: var(--neutral-2);
+	}
+
+	figure {
+		background-color: var(--neutral-1);
+		border-color: var(--neutral-2);
+	}
+
+	figure img {
+		background-color: var(--neutral-0);
+		border-color: var(--neutral-2);
+	}
+
+	option {
+		background-color: var(--neutral-0);
+	}
+
+	input,
+	select {
+		background-color: var(--neutral-1);
+		border-color: var(--neutral-2);
+	}
+
+	footer {
+		background-color: var(--neutral-1);
+		border-color: var(--neutral-2);
+	}
+}
