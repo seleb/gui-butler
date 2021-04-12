@@ -316,7 +316,7 @@ window.App = class App {
 	}
 	onButlerProgress(message) {
 		// update on upload progress
-		document.querySelector('#progress').value = message.progress;
+		document.querySelector('progress').value = message.progress;
 		document.querySelector('#eta').value = formatSeconds(message.eta);
 	}
 	onButlerError(message) {
