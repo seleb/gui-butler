@@ -41,5 +41,4 @@ $(document).ready(async function () {
 	});
 
 	await app.butler_init();
-	app.tryLogin();
 });
