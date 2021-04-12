@@ -1,7 +1,6 @@
 const { ipcMain, dialog, shell } = require('electron');
 const Butler = require('./butler');
 const { win } = require('./window');
-const { readFile } = require('fs').promises;
 
 async function yesno(json) {
 	const { response } = await dialog.showMessageBox(win, {
