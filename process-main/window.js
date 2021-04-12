@@ -37,4 +37,7 @@ module.exports = {
 	getWindow() {
 		return win;
 	},
+	showWindow() {
+		return win.show();
+	},
 };
