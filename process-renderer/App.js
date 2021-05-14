@@ -48,7 +48,7 @@ window.App = class App {
 			this.selectFile(event.currentTarget.files[0]);
 		});
 		document.querySelector('#btnPush').addEventListener('click', () => {
-			this.butler_push(this.selectedFile, this.getProjectUrl());
+			this.butler_push(this.selectedFile, this.getProjectUrl(), document.querySelector('#versionInput').value);
 		});
 		document.querySelector('#btnCheckStatus').addEventListener('click', () => {
 			this.butler_status(this.getProjectUrl());
@@ -287,12 +287,16 @@ window.App = class App {
 		const version = await api.invoke('butler', 'version');
 		document.querySelector('#version').textContent = version.value.version;
 	}
-	async butler_push(file, url) {
+	async butler_push(file, url, version) {
 		document.querySelector('#btnPush').disabled = true;
 		show(document.querySelector('#progress'));
 		document.querySelector('#progress').scrollIntoView();
 		try {
-			await api.invoke('butler', 'push', file, url);
+			if (version) {
+				await api.invoke('butler', 'push', file, url, `--userversion=${version}`);
+			} else {
+				await api.invoke('butler', 'push', file, url);
+			}
 		} finally {
 			hide(document.querySelector('#progress'));
 			document.querySelector('#btnPush').disabled = false;
