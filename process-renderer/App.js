@@ -191,7 +191,9 @@ window.App = class App {
 
 		// get rid of the old cover, then set then new one
 		document.querySelector('#projectCover').src = '';
-		document.querySelector('#projectCover').src = this.selectedProject.cover_url;
+		if (this.selectedProject.cover_url) {
+			document.querySelector('#projectCover').src = this.selectedProject.cover_url;
+		}
 
 		// update text
 		document.querySelector('#projectText').textContent = this.selectedProject.short_text;
