@@ -13,7 +13,7 @@
     "update-butler": "sh update-butler.sh"
   },
   "devDependencies": {
-    "electron": "^12.0.16",
+    "electron": "^13.1.9",
     "electron-packager": "^15.3.0"
   },
   "dependencies": {

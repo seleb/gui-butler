@@ -11,9 +11,7 @@ if (!primaryInstance) {
 
 app.on('ready', () => {
 	// disable all session permissions
-	session.defaultSession.setPermissionCheckHandler((_webContents, _permission, callback) => {
-		callback(false);
-	});
+	session.defaultSession.setPermissionCheckHandler(() => false);
 	app.removeAsDefaultProtocolClient('gui-butler');
 	if (!app.isPackaged) {
 		app.setAsDefaultProtocolClient('gui-butler', process.execPath, [path.resolve(process.argv[1])]);
