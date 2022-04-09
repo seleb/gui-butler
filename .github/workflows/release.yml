@@ -1,0 +1,63 @@
+name: release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-desktop:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['windows', 'ubuntu', 'macos']
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm run package
+
+      # consistent folder name
+      - run: mv bin/gui-butler-* bin/gui-butler
+        shell: bash
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.os }}
+          path: gui-butler
+
+  publish:
+    needs: build-desktop
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['windows', 'ubuntu', 'macos']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.1.0
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ matrix.os }}
+          path: build
+      - uses: josephbmanley/butler-publish-itchio-action@v1.0.3
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH_API_KEY }}
+          CHANNEL: ${{ fromJSON('{"ubuntu":"linux"}')[matrix.os] || matrix.os }}
+          ITCH_GAME: gui-butler
+          ITCH_USER: seansleblanc
+          PACKAGE: build
+          VERSION: ${{ steps.package-version.outputs.current-version }}
+
+  cleanup:
+    if: ${{ always() }}
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geekyeggo/delete-artifact@v1
+        with:
+          name: |
+            macos
+            ubuntu
+            windows
