@@ -173,8 +173,6 @@ fieldset {
 	padding: 1rem 0.5rem;
 	display: grid;
 	grid-template-columns: 8rem 1fr;
-	/* fixes issue with legend taking up grid space */
-	grid-template-rows: 0;
 	grid-gap: 0.25rem 0.5rem;
 	align-items: center;
 }
@@ -182,6 +180,7 @@ fieldset {
 fieldset legend {
 	font-weight: bold;
 	padding-top: 0.5rem;
+	margin-bottom: -1rem;
 }
 
 fieldset legend,
