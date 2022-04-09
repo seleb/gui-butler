@@ -1,3 +1,11 @@
+## [2.2.4](https://github.com/seleb/gui-butler/compare/v2.2.3...v2.2.4) (2022-04-09)
+
+
+### Bug Fixes
+
+* legend grid spacing ([e7e5218](https://github.com/seleb/gui-butler/commit/e7e52180e32d59fd6f9e39f2ea98fc641a86fbd2))
+* update electron ([477798a](https://github.com/seleb/gui-butler/commit/477798a15e9ba854dbdd89457d67cf0ddc23ef7e))
+
 ## [2.2.3](https://github.com/seleb/gui-butler/compare/v2.2.2...v2.2.3) (2022-04-09)
 
 
