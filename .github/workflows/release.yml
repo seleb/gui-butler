@@ -44,7 +44,7 @@ jobs:
           path: build
       - uses: josephbmanley/butler-publish-itchio-action@v1.0.3
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.ITCH_API_KEY }}
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: ${{ fromJSON('{"ubuntu":"linux"}')[matrix.os] || matrix.os }}
           ITCH_GAME: gui-butler
           ITCH_USER: seansleblanc
