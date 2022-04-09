@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/seleb/gui-butler/compare/v2.2.0...v2.2.1) (2022-04-09)
+
+
+### Bug Fixes
+
+* update electron ([feef38a](https://github.com/seleb/gui-butler/commit/feef38ada5908531447eeb7c3f3ad57b431f31a6))
+
 # [2.2.0](https://github.com/seleb/gui-butler/compare/v2.1.2...v2.2.0) (2022-04-09)
 
 
