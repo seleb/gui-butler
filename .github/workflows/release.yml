@@ -24,7 +24,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.os }}
-          path: gui-butler
+          path: bin/gui-butler
 
   publish:
     needs: build-desktop
