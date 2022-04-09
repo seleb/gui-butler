@@ -14,7 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - run: npm run package
+      - run: npm run ci
+      - run: npm run build
 
       # consistent folder name
       - run: mv bin/gui-butler-* bin/gui-butler
