@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/seleb/gui-butler/compare/v2.2.1...v2.2.2) (2022-04-09)
+
+
+### Bug Fixes
+
+* update dependencies ([ac35272](https://github.com/seleb/gui-butler/commit/ac352729156648273fcba0d7e7a1b90b159bfcca))
+
 ## [2.2.1](https://github.com/seleb/gui-butler/compare/v2.2.0...v2.2.1) (2022-04-09)
 
 
