@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/seleb/gui-butler/compare/v2.1.2...v2.2.0) (2022-04-09)
+
+
+### Features
+
+* automatically publish win/mac/linux release to itch ([6e6ca15](https://github.com/seleb/gui-butler/commit/6e6ca155738a2d7299fc1980959b0502979bc830))
+
 ## [2.1.2](https://github.com/seleb/gui-butler/compare/v2.1.1...v2.1.2) (2022-04-09)
 
 
