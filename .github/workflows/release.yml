@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+      - run: npm run update-butler
+        env:
+          BUTLER_PATH: ${{ fromJSON('{"ubuntu":"linux","maxos":"darwin"}')[matrix.os] || matrix.os }}
       - run: npm ci
       - run: npm run build
 

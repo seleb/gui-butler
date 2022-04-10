@@ -2,7 +2,10 @@
 # https://itch.io/docs/butler/installing.html
 # -L follows redirects
 # -O specifies output name
-curl -L -o butler.zip https://broth.itch.ovh/butler/windows-amd64/LATEST/archive/default
+
+if [ -z ${BUTLER_PATH+x} ]; then echo "BUTLER_PATH is unset"; exit 1; fi
+
+curl -L -o butler.zip https://broth.itch.ovh/butler/$BUTLER_PATH-amd64/LATEST/archive/default
 unzip butler.zip -d ./butler
 rm butler.zip
 cd ./butler
