@@ -1,3 +1,10 @@
+## [2.2.6](https://github.com/seleb/gui-butler/compare/v2.2.5...v2.2.6) (2022-04-10)
+
+
+### Bug Fixes
+
+* exclude unnecessary git files from build ([441c018](https://github.com/seleb/gui-butler/commit/441c018eb642133cdf2e1e877561b9df635c7d71))
+
 ## [2.2.5](https://github.com/seleb/gui-butler/compare/v2.2.4...v2.2.5) (2022-04-10)
 
 
