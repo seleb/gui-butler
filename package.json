@@ -10,7 +10,7 @@
   "main": "process-main/main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . --appname=gui-butler --icon=favicon.ico --out=bin --prune --overwrite",
+    "build": "rm -rf bin && electron-packager . --appname=gui-butler --icon=favicon.ico --out=bin --prune --overwrite --ignore=\\.git.*",
     "update-butler": "sh update-butler.sh"
   },
   "release": {
