@@ -33,11 +33,11 @@
     ]
   },
   "devDependencies": {
-    "electron": "^18.0.3",
-    "electron-packager": "^15.3.0"
+    "electron": "^20.1.0",
+    "electron-packager": "^16.0.0"
   },
   "dependencies": {
-    "electron-store": "^8.0.0",
+    "electron-store": "^8.1.0",
     "normalize.css": "^8.0.1"
   }
 }
