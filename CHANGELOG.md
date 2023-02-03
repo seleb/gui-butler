@@ -1,3 +1,10 @@
+## [2.2.8](https://github.com/seleb/gui-butler/compare/v2.2.7...v2.2.8) (2023-02-03)
+
+
+### Bug Fixes
+
+* **deps:** bump got and electron ([#11](https://github.com/seleb/gui-butler/issues/11)) ([ed834fb](https://github.com/seleb/gui-butler/commit/ed834fb9ed841179bf30023e5cf521681594eb95))
+
 ## [2.2.7](https://github.com/seleb/gui-butler/compare/v2.2.6...v2.2.7) (2022-08-31)
 
 
