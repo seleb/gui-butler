@@ -1,3 +1,10 @@
+## [2.2.10](https://github.com/seleb/gui-butler/compare/v2.2.9...v2.2.10) (2023-06-11)
+
+
+### Bug Fixes
+
+* case sensitivity error in butler module name ([948330b](https://github.com/seleb/gui-butler/commit/948330b80b86c5b21560538ad78ce94d12a2322c))
+
 ## [2.2.9](https://github.com/seleb/gui-butler/compare/v2.2.8...v2.2.9) (2023-06-11)
 
 
