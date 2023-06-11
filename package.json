@@ -2,7 +2,7 @@
   "private": true,
   "name": "gui-butler",
   "productName": "gui-butler",
-  "version": "2.2.8",
+  "version": "2.2.9",
   "description": "A GUI wrapper for itch.io's butler CLI",
   "license": "MIT",
   "author": "Sean S. LeBlanc <sean.s.leblanc@gmail.com>",
