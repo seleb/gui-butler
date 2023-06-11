@@ -1,5 +1,5 @@
 const { ipcMain, dialog, shell } = require('electron');
-const Butler = require('./butler-interface');
+const Butler = require('./butler-wrapper');
 const { getWindow } = require('./window');
 const { forgetToken, getToken, rememberToken } = require('./oauth');
 
