@@ -1,3 +1,16 @@
+# [2.3.0](https://github.com/seleb/gui-butler/compare/v2.2.10...v2.3.0) (2023-06-12)
+
+
+### Bug Fixes
+
+* prevent other non-JSON messages from interrupting login ([882f41f](https://github.com/seleb/gui-butler/commit/882f41fceb64f463ab3a7378dd451446fc2c9201))
+* update electron ([09844bf](https://github.com/seleb/gui-butler/commit/09844bf1a20f11062077b1539f1da66bdf9fdf57))
+
+
+### Features
+
+* reuse env token if provided ([2b2a8c6](https://github.com/seleb/gui-butler/commit/2b2a8c6dfaeab26c3037e5f2777f93eda3cd71c6))
+
 ## [2.2.10](https://github.com/seleb/gui-butler/compare/v2.2.9...v2.2.10) (2023-06-11)
 
 
