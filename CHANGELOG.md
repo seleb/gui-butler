@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/seleb/gui-butler/compare/v2.3.0...v2.3.1) (2023-06-12)
+
+
+### Bug Fixes
+
+* include custom protocol in electron-packager command ([7dc178b](https://github.com/seleb/gui-butler/commit/7dc178ba6e1c382315732ec5d7247b9d54c32b32))
+
 # [2.3.0](https://github.com/seleb/gui-butler/compare/v2.2.10...v2.3.0) (2023-06-12)
 
 
