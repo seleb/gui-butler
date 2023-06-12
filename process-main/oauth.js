@@ -24,6 +24,9 @@ module.exports = {
 	},
 	async getToken(rememberMe) {
 		return new Promise((resolve, reject) => {
+			if (process.env.BUTLER_API_KEY) {
+				return resolve(process.env.BUTLER_API_KEY);
+			}
 			const nonce = crypto.randomBytes(16).toString('hex');
 			app.once('second-instance', (_event, args) => {
 				showWindow();
@@ -35,15 +38,17 @@ module.exports = {
 				if (params.get('state') === nonce) {
 					const token = params.get('access_token');
 					resolve(token);
-					if (rememberMe) {
-						store.set('gui-butler-token', token);
-					}
 				} else {
 					reject(new Error('oauth failed: nonce did not match'));
 				}
 			});
 			shell.openExternal(`https://itch.io/user/oauth?client_id=${clientId}&scope=profile%3Agames&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&state=${nonce}`);
-		});
+		}).then(token => {
+			if (rememberMe) {
+				store.set('gui-butler-token', token);
+			};
+			return token;
+		})
 	},
 	forgetToken() {
 		return store.delete('gui-butler-token');
