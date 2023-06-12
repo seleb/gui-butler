@@ -20,9 +20,19 @@ function parseMessages(string) {
 			.trim()
 			// fix status messages not being json
 			.replace(/([+|].*[+|])/gm, JSON.stringify({ level: 'info', message: '$1', type: 'log' }))
-			// convert to json
 			.split('\n')
-			.map(JSON.parse)
+			// filter non-JSON "bailing" messages
+			.filter(i => !i.startsWith('bailing out:'))
+			// convert to json
+			.map(i => {
+				try {
+					return JSON.parse(i);
+				} catch (err) {
+					// wharf errors sometimes end up here due to also being multi-line, but they'll get logged by the error popup already
+					console.log('Non-JSON message:', i);
+					return '';
+				}
+			}).filter(i => i)
 	);
 }
 
