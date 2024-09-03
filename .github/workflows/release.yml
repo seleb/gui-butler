@@ -43,7 +43,7 @@ jobs:
       - uses: actions/setup-node@v3
       - id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.1.0
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4.1.7
         with:
           name: ${{ matrix.os }}
           path: build
