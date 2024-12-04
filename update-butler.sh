@@ -5,7 +5,7 @@
 
 if [ -z ${BUTLER_PATH+x} ]; then echo "BUTLER_PATH is unset"; exit 1; fi
 
-curl -L -o butler.zip https://broth.itch.ovh/butler/$BUTLER_PATH-amd64/LATEST/archive/default
+curl -L -o butler.zip https://broth.itch.zone/butler/$BUTLER_PATH-amd64/LATEST/archive/default
 unzip butler.zip -d ./butler
 rm butler.zip
 cd ./butler
