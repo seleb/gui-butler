@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/seleb/gui-butler/compare/v2.3.1...v2.3.2) (2024-12-04)
+
+
+### Bug Fixes
+
+* update butler url to use `zone` instead of `ovh` ([e800695](https://github.com/seleb/gui-butler/commit/e800695cd8d623597f670b136d9ddd289030d8f5))
+
 ## [2.3.1](https://github.com/seleb/gui-butler/compare/v2.3.0...v2.3.1) (2023-06-12)
 
 
