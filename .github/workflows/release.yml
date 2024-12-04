@@ -47,7 +47,7 @@ jobs:
         with:
           name: ${{ matrix.os }}
           path: build
-      - uses: josephbmanley/butler-publish-itchio-action@v1.0.3
+      - uses: yeslayla/butler-publish-itchio-action@b5f0b072e8b12b731c69f12b5430f594700e0947
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: ${{ fromJSON('{"ubuntu":"linux"}')[matrix.os] || matrix.os }}
