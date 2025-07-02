@@ -12,10 +12,10 @@ jobs:
         os: ['windows', 'ubuntu', 'macos']
     runs-on: ${{ matrix.os }}-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - run: npm run update-butler
         env:
           BUTLER_PATH: ${{ fromJSON('{"ubuntu":"linux","macos":"darwin"}')[matrix.os] || matrix.os }}
@@ -26,7 +26,7 @@ jobs:
       - run: mv bin/gui-butler-* bin/gui-butler
         shell: bash
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}
           path: bin/gui-butler
@@ -39,11 +39,11 @@ jobs:
         os: ['windows', 'ubuntu', 'macos']
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
       - id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.1.0
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: ${{ matrix.os }}
           path: build
@@ -61,7 +61,7 @@ jobs:
     needs: publish
     runs-on: ubuntu-latest
     steps:
-      - uses: geekyeggo/delete-artifact@v1
+      - uses: geekyeggo/delete-artifact@v5
         with:
           name: |
             macos
