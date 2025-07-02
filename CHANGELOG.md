@@ -1,3 +1,10 @@
+## [2.3.3](https://github.com/seleb/gui-butler/compare/v2.3.2...v2.3.3) (2025-07-02)
+
+
+### Bug Fixes
+
+* **deps-dev:** bump electron from 25.8.4 to 28.3.2 ([#18](https://github.com/seleb/gui-butler/issues/18)) ([8c3cbfc](https://github.com/seleb/gui-butler/commit/8c3cbfce60a5c3d8f1261963146e162030e9a8e6))
+
 ## [2.3.2](https://github.com/seleb/gui-butler/compare/v2.3.1...v2.3.2) (2024-12-04)
 
 
