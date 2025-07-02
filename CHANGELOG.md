@@ -1,3 +1,10 @@
+## [2.3.4](https://github.com/seleb/gui-butler/compare/v2.3.3...v2.3.4) (2025-07-02)
+
+
+### Bug Fixes
+
+* versions in release process ([45a7759](https://github.com/seleb/gui-butler/commit/45a775941481aec77b59fbbaed1e5cef9709237e))
+
 ## [2.3.3](https://github.com/seleb/gui-butler/compare/v2.3.2...v2.3.3) (2025-07-02)
 
 
